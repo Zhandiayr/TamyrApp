@@ -1,4 +1,4 @@
-package com.example.tamyrapp2
+package com.example.tamyrapp2.ui
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -7,7 +7,8 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.example.tamyrapp2.viewmodel.AuthViewModel
+import com.example.tamyrapp2.R
+import com.example.tamyrapp2.retrofit.auth.AuthViewModel
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
