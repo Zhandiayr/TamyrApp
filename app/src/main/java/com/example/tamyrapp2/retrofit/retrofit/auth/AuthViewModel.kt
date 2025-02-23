@@ -1,4 +1,4 @@
-package com.example.tamyrapp2.viewmodel
+package com.example.tamyrapp2.retrofit.retrofit.auth
 
 import android.app.Application
 import android.content.Context
@@ -6,8 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.work.*
-import com.example.tamyrapp2.retrofit.*
-import com.example.tamyrapp2.worker.TokenRefreshWorker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

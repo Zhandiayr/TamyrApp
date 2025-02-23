@@ -1,10 +1,8 @@
-package com.example.tamyrapp2.worker
+package com.example.tamyrapp2.retrofit.retrofit.auth
 
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.example.tamyrapp2.retrofit.AuthResponse
-import com.example.tamyrapp2.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

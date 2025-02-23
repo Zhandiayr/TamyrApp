@@ -1,4 +1,4 @@
-package com.example.tamyrapp2.retrofit
+package com.example.tamyrapp2.retrofit.retrofit.auth
 
 data class RegisterRequest (
     val username: String,

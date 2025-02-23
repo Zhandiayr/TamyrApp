@@ -5,7 +5,7 @@ data class AuthResponse(
     val refreshToken: String
 )
 */
-package com.example.tamyrapp2.retrofit
+package com.example.tamyrapp2.retrofit.retrofit.auth
 
 data class AuthResponse(
     val accessToken: String,

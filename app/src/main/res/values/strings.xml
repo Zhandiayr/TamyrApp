@@ -8,5 +8,11 @@
     <string name="login">Login</string>
     <string name="registration">Registration</string>
     <string name="app_name">TamyrApp</string>
+
+
+    <string name="hint_age">Возраст</string>
+    <string name="hint_weight">Вес</string>
+    <string name="hint_height">Рост</string>
+    <string name="button_save">Сохранить</string>
 </resources>
 

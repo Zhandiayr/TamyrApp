@@ -1,4 +1,4 @@
-package com.example.tamyrapp2
+package com.example.tamyrapp2.UI
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -7,7 +7,8 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.example.tamyrapp2.viewmodel.AuthViewModel
+import com.example.tamyrapp2.R
+import com.example.tamyrapp2.retrofit.retrofit.auth.AuthViewModel
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
@@ -33,7 +34,11 @@ class LoginActivity : AppCompatActivity() {
                 sharedPreferences.edit().putString("access_token", token).apply()
                 sharedPreferences.edit().putString("refresh_token", viewModel.refreshToken.value).apply()
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
+
+                // ✅ Теперь отправляем пользователя в HomeActivity
+                val intent = Intent(this, com.example.tamyrapp2.UI.HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
                 finish()
             }
         })
@@ -43,3 +48,4 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 }
+

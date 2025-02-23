@@ -1,4 +1,4 @@
-package com.example.tamyrapp2.retrofit
+package com.example.tamyrapp2.retrofit.retrofit.auth
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
