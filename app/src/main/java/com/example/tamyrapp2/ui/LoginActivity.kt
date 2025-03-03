@@ -3,6 +3,7 @@ package com.example.tamyrapp2.ui
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,15 +30,21 @@ class LoginActivity : AppCompatActivity() {
             viewModel.loginUser(etUsername.text.toString(), etPassword.text.toString())
         }
 
-        viewModel.accessToken.observe(this, Observer { token ->
-            if (token != null) {
-                sharedPreferences.edit().putString("access_token", token).apply()
-                sharedPreferences.edit().putString("refresh_token", viewModel.refreshToken.value).apply()
-                Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
+        viewModel.accessToken.observe(this) { token ->
+            if (!token.isNullOrEmpty()) {
+                sharedPreferences.edit()
+                    .putString("access_token", token)
+                    .apply()
+
+                Log.d("LoginActivity", "✅ Токен сохранён: $token") // Логируем сохранённый токен
+
+                startActivity(Intent(this, HomeActivity::class.java))
                 finish()
+            } else {
+                Log.e("LoginActivity", "❌ Ошибка: токен пустой!")
             }
-        })
+        }
+
 
         viewModel.error.observe(this, Observer { error ->
             tvError.text = error

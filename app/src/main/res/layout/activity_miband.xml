@@ -1,39 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/white">
 
+    <!-- Заголовок -->
     <TextView
-        android:id="@+id/tv_device_name"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Устройство не подключено"
-        android:textSize="18sp"
+        android:text="Mi Band"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-medium"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="16dp"/>
 
+    <!-- Карточка с подключенным устройством -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_manage"
+                app:tint="@color/teal_700"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="12dp"/>
+
+            <TextView
+                android:id="@+id/tv_device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Устройство не подключено"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Кнопка подключения реального устройства -->
     <Button
         android:id="@+id/btn_connect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="+ Подключить устройство"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:backgroundTint="@color/teal_700"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"/>
 
+    <!-- Кнопка подключения фейкового устройства -->
+    <Button
+        android:id="@+id/btn_fake_connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Подключить фейковый Mi Band"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"
+        android:layout_marginTop="12dp"/>
+
+    <!-- Кнопка просмотра данных -->
     <Button
         android:id="@+id/btn_view_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Посмотреть данные"
         android:textAllCaps="false"
-        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
+        android:layout_marginTop="12dp"
         android:enabled="false"/>
-    <Button
-        android:id="@+id/btn_fake_connect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Подключить фейковый Mi Band"
-        android:layout_marginTop="16dp"/>
-
 </LinearLayout>

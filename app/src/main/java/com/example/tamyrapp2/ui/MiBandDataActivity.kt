@@ -3,7 +3,9 @@ package com.example.tamyrapp2.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
@@ -22,18 +24,37 @@ class MiBandDataActivity : AppCompatActivity() {
         val tvHeartRate = findViewById<TextView>(R.id.tv_heart_rate)
         val tvSteps = findViewById<TextView>(R.id.tv_steps)
         val tvSleep = findViewById<TextView>(R.id.tv_sleep)
+        val btnBack = findViewById<Button>(R.id.btn_back) // 🔹 Кнопка назад
 
-        // Обновляем UI данными из ViewModel
+        /**
+         * 🩺 Обновляем UI данными из ViewModel
+         */
         viewModel.heartRate.observe(this) { heartRate ->
-            tvHeartRate.text = "Пульс: $heartRate уд/мин"
+            tvHeartRate.text = "💓 Пульс: ${heartRate ?: "N/A"} уд/мин"
         }
 
         viewModel.steps.observe(this) { steps ->
-            tvSteps.text = "Шаги: $steps"
+            tvSteps.text = "🚶 Шаги: ${steps ?: "N/A"}"
         }
 
         viewModel.sleepHours.observe(this) { sleep ->
-            tvSleep.text = "Сон: $sleep ч."
+            tvSleep.text = "😴 Сон: ${sleep ?: "N/A"} ч."
+        }
+
+        /**
+         * ❌ Обрабатываем ошибки (если данные не загружаются)
+         */
+        viewModel.error.observe(this) { error ->
+            if (!error.isNullOrEmpty()) {
+                Toast.makeText(this, "❌ Ошибка загрузки данных: $error", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        /**
+         * 🔙 Кнопка назад
+         */
+        btnBack.setOnClickListener {
+            finish() // Закрываем активити и возвращаемся назад
         }
     }
 }

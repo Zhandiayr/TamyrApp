@@ -132,4 +132,15 @@
         android:textColor="@color/white"
         android:layout_marginTop="12dp" />
 
+    <!-- Кнопка назад -->
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Назад"
+        android:textSize="16sp"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp" />
+
 </LinearLayout>

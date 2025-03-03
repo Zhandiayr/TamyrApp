@@ -2,45 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="16dp">
 
+    <!-- Заголовок -->
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Выберите устройство Mi Band"
-        android:textSize="20sp"
-        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="16dp"/>
+        android:paddingBottom="16dp"
+        android:text="Выберите устройство Mi Band"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
+    <!-- Список доступных устройств -->
     <ListView
         android:id="@+id/device_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/gray"
         android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"/>
+        android:dividerHeight="1dp" />
 
+    <!-- Сообщение, если устройств нет -->
     <TextView
         android:id="@+id/tv_no_devices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Нет доступных устройств"
-        android:textSize="16sp"
-        android:visibility="gone"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="16dp"/>
+        android:paddingTop="16dp"
+        android:text="Нет доступных устройств"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
+    <!-- Кнопка обновления списка -->
     <Button
         android:id="@+id/btn_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Обновить список"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/teal_700"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="16dp"/>
+        android:padding="10dp"
+        android:text="Обновить список"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

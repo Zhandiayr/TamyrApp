@@ -2,6 +2,7 @@ package com.example.tamyrapp2.retrofit.miband
 
 import android.app.Application
 import android.bluetooth.BluetoothDevice
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.tamyrapp2.retrofit.auth.RetrofitInstance
@@ -29,6 +30,14 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun sendDataToBackend(token: String) {
+        if (token.isEmpty() || token.isBlank()) {
+            Log.e("MiBandViewModel", "❌ Ошибка: Токен пустой!")
+            error.postValue("Ошибка аутентификации: пустой токен")
+            return
+        }
+
+        Log.d("MiBandViewModel", "📡 Отправка данных с токеном: $token") // Логируем токен
+
         val request = MiBandDataRequest(
             heartRate = heartRate.value ?: 0,
             steps = steps.value ?: 0,
@@ -40,14 +49,22 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
 
         api.sendMiBandData("Bearer $token", request).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                success.postValue(response.isSuccessful)
+                if (response.isSuccessful) {
+                    success.postValue(true)
+                    Log.d("MiBandViewModel", "✅ Данные успешно отправлены")
+                } else {
+                    Log.e("MiBandViewModel", "❌ Ошибка на сервере: ${response.errorBody()?.string()}")
+                    error.postValue("Ошибка сервера: ${response.code()}")
+                }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                error.postValue("Ошибка отправки данных: ${t.message}")
+                Log.e("MiBandViewModel", "❌ Ошибка сети: ${t.message}")
+                error.postValue("Ошибка сети: ${t.message}")
             }
         })
     }
+
 
     fun disconnect() {
         miBandService.disconnect()
