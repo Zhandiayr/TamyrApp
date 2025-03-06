@@ -6,12 +6,10 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
-import com.example.tamyrapp2.retrofit.PersonalInfoRequest
+import com.example.tamyrapp2.retrofit.retrofit.Questionnaire.PersonalInfoRequest
 import com.example.tamyrapp2.retrofit.retrofit.auth.RetrofitInstance
+import android.util.Log
 import com.example.tamyrapp2.UI.HomeActivity
-
-
-
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,7 +54,13 @@ class PersonalInfoActivity : AppCompatActivity() {
 
     private fun savePersonalInfo(age: Int, sex: String, weight: Int, height: Int) {
         val token = sharedPreferences.getString("access_token", null) ?: return
+        if (token.isNullOrEmpty()) {
+            Toast.makeText(this, "Ошибка: отсутствует access_token", Toast.LENGTH_LONG).show()
+            return
+        }
         val request = PersonalInfoRequest(age, sex, weight, height)
+        Log.d("PersonalInfo", "Отправка данных: age=$age, sex=$sex, weight=$weight, height=$height, token=$token")
+
 
         RetrofitInstance.api.savePersonalInfo("Bearer $token", request).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -64,12 +68,12 @@ class PersonalInfoActivity : AppCompatActivity() {
                     sharedPreferences.edit().putBoolean("personal_info_filled", true).apply()
                     Toast.makeText(this@PersonalInfoActivity, "Анкета сохранена!", Toast.LENGTH_SHORT).show()
 
-                    // ✅ Отправляем пользователя в HomeActivity
                     val intent = Intent(this@PersonalInfoActivity, HomeActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 } else {
-                    Toast.makeText(this@PersonalInfoActivity, "Ошибка сохранения", Toast.LENGTH_SHORT).show()
+                    val errorBody = response.errorBody()?.string()
+                    Toast.makeText(this@PersonalInfoActivity, "Ошибка сохранения: ${response.code()} - $errorBody", Toast.LENGTH_LONG).show()
                 }
             }
 

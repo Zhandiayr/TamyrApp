@@ -10,7 +10,7 @@ interface AuthApiService {
 }
  */
 package com.example.tamyrapp2.retrofit.retrofit.auth
-import com.example.tamyrapp2.retrofit.PersonalInfoRequest
+import com.example.tamyrapp2.retrofit.retrofit.Questionnaire.PersonalInfoRequest
 
 
 import retrofit2.Call
