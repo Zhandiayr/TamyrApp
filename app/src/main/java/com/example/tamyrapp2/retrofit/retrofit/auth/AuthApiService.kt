@@ -28,6 +28,6 @@ interface AuthApiService {
     @POST("refresh_token") // Обновление токена
     fun refreshToken(@Header("Authorization") token: String): Call<AuthResponse>
 
-    @POST("personal_info")
+    @POST("api/personal-info") // Исправлен путь
     fun savePersonalInfo(@Header("Authorization") token: String, @Body request: PersonalInfoRequest): Call<Void>
 }

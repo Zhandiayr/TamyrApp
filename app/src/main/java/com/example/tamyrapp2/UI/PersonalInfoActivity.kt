@@ -54,11 +54,12 @@ class PersonalInfoActivity : AppCompatActivity() {
 
     private fun savePersonalInfo(age: Int, sex: String, weight: Int, height: Int) {
         val token = sharedPreferences.getString("access_token", null) ?: return
+        val userId = sharedPreferences.getLong("user_id", -1) // Получаем userId
         if (token.isNullOrEmpty()) {
             Toast.makeText(this, "Ошибка: отсутствует access_token", Toast.LENGTH_LONG).show()
             return
         }
-        val request = PersonalInfoRequest(age, sex, weight, height)
+        val request = PersonalInfoRequest(userId, age, sex, weight, height)
         Log.d("PersonalInfo", "Отправка данных: age=$age, sex=$sex, weight=$weight, height=$height, token=$token")
 
 

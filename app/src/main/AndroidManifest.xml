@@ -47,6 +47,20 @@
         <activity
             android:name=".UI.PersonalInfoActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".UI.StatisticsActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".UI.NotificationsActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".UI.SettingsActivity"
+            android:exported="true"/>
+
     </application>
+
 
     </manifest>
