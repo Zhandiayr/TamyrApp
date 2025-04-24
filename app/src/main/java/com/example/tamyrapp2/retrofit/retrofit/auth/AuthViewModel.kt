@@ -15,7 +15,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val sharedPreferences = application.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
     private val workManager = WorkManager.getInstance(application)
 
-    private val _success = MutableLiveData<Boolean>() // ✅ Добавлено для обработки успешной регистрации
+    private val _success = MutableLiveData<Boolean>()
     val success: LiveData<Boolean> = _success
 
     private val _accessToken = MutableLiveData<String?>()
@@ -27,12 +27,17 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
+    val userFirstName = MutableLiveData<String>()
+    val userEmail = MutableLiveData<String>()
+
     fun registerUser(username: String, email: String, password: String, firstName: String, lastName: String) {
         val request = RegisterRequest(username, email, password, firstName, lastName)
         RetrofitInstance.api.registerUser(request).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    _success.value = true // ✅ Успешная регистрация
+                    userFirstName.value = firstName
+                    userEmail.value = email
+                    _success.value = true
                 } else {
                     _error.value = response.errorBody()?.string() ?: "Ошибка регистрации: ${response.code()}"
                 }
@@ -55,11 +60,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     _accessToken.value = token
                     _refreshToken.value = refresh
 
-                    // ✅ Сохраняем токены
                     sharedPreferences.edit().putString("access_token", token).apply()
                     sharedPreferences.edit().putString("refresh_token", refresh).apply()
 
-                    // ✅ Запускаем обновление токена
                     scheduleTokenRefresh()
                 } else {
                     _error.value = response.errorBody()?.string() ?: "Ошибка входа: ${response.code()}"
@@ -85,7 +88,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     val newToken = response.body()?.accessToken
                     _accessToken.value = newToken
 
-                    // ✅ Обновляем токен в SharedPreferences
                     sharedPreferences.edit().putString("access_token", newToken).apply()
                 } else {
                     _error.value = response.errorBody()?.string() ?: "Ошибка обновления токена: ${response.code()}"

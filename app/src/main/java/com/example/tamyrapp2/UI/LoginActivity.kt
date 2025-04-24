@@ -34,9 +34,17 @@ class LoginActivity : AppCompatActivity() {
             if (token != null) {
                 sharedPreferences.edit().putString("access_token", token).apply()
                 sharedPreferences.edit().putString("refresh_token", viewModel.refreshToken.value).apply()
+
+                // Сохраняем имя и email, если они пришли из ViewModel (например, после регистрации)
+                viewModel.userFirstName.value?.let { firstName ->
+                    sharedPreferences.edit().putString("user_firstname", firstName).apply()
+                }
+                viewModel.userEmail.value?.let { email ->
+                    sharedPreferences.edit().putString("user_email", email).apply()
+                }
+
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
 
-                // ✅ Теперь отправляем пользователя в HomeActivity
                 val intent = Intent(this, com.example.tamyrapp2.UI.HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
@@ -49,4 +57,3 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 }
-
