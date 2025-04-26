@@ -7,17 +7,186 @@
     android:layout_height="match_parent"
     tools:context=".UI.StatisticsActivity">
 
-    <TextView
-        android:id="@+id/tv_statistics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Statistics Page"
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <!-- Заголовок Statics -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_statics"
+        android:layout_width="343dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#EDECF4"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <TextView
+            android:id="@+id/tv_statics"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Statics"
+            android:textColor="#432C81"
+            android:textSize="40sp"
+            android:fontFamily="@font/raleway_bold"
+            android:gravity="center"
+            android:letterSpacing="-0.01" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Список карточек -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_list_container"
+        android:layout_width="375dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#EDECF4"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/card_statics"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/linear_layout_cards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center_horizontal">
+
+                <!-- Карточка за 29 апреля -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="343dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#FCFCF4"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="24dp"
+                        android:paddingBottom="24dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="29 April 2025"
+                            android:textColor="#432C81"
+                            android:textSize="16sp"
+
+                            android:letterSpacing="-0.005"
+                            android:lineHeight="26sp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Feeling good today! Keep up the great mood! \uD83D\uDE80"
+                            android:textColor="#7B6BA8"
+                            android:textSize="14sp"
+
+                            android:lineHeight="21sp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Карточка за 28 апреля -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="343dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#FCFCF4"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="24dp"
+                        android:paddingBottom="24dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="28 April 2025"
+                            android:textColor="#432C81"
+                            android:textSize="16sp"
+
+                            android:letterSpacing="-0.005"
+                            android:lineHeight="26sp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Today was productive. Great job maintaining your health goals!"
+                            android:textColor="#7B6BA8"
+                            android:textSize="14sp"
+
+                            android:lineHeight="21sp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Карточка за 27 апреля -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="343dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#FCFCF4"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="24dp"
+                        android:paddingBottom="24dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="27 April 2025"
+                            android:textColor="#432C81"
+                            android:textSize="16sp"
+
+                            android:letterSpacing="-0.005"
+                            android:lineHeight="26sp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="Remember to drink water and take a small walk. Stay active!"
+                            android:textColor="#7B6BA8"
+                            android:textSize="14sp"
+
+                            android:lineHeight="21sp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Нижняя навигация -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
@@ -27,4 +196,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
