@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.tamyrapp2.R
-import com.example.tamyrapp2.retrofit.retrofit.auth.AuthViewModel
+import com.example.tamyrapp2.data.network.auth.AuthViewModel
 
 class RegisterActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()

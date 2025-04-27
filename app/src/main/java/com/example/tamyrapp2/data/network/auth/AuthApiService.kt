@@ -9,8 +9,7 @@ interface AuthApiService {
     fun registerUser(@Body request: RegisterRequest): Call<AuthResponse>
 }
  */
-package com.example.tamyrapp2.retrofit.retrofit.auth
-import com.example.tamyrapp2.retrofit.retrofit.Questionnaire.PersonalInfoRequest
+package com.example.tamyrapp2.data.network.auth
 
 
 import retrofit2.Call
@@ -27,7 +26,4 @@ interface AuthApiService {
 
     @POST("refresh_token") // Обновление токена
     fun refreshToken(@Header("Authorization") token: String): Call<AuthResponse>
-
-    @POST("api/personal-info") // Исправлен путь
-    fun savePersonalInfo(@Header("Authorization") token: String, @Body request: PersonalInfoRequest): Call<Void>
 }

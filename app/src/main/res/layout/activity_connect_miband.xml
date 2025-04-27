@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
+
+    <!-- Поле для MAC-адреса -->
+    <EditText
+        android:id="@+id/et_device_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите MAC-адрес Mi Band"
+        android:inputType="text"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Кнопка подключения -->
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Подключиться" />
+
+</LinearLayout>
