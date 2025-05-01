@@ -27,16 +27,17 @@ class SettingsActivity : AppCompatActivity() {
         profileImage = findViewById(R.id.profile_image)
         sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
 
-        // Устанавливаем имя и email пользователя из SharedPreferences
+        // Устанавливаем username и email пользователя
         val userNameTextView = findViewById<TextView>(R.id.tv_user_name)
         val userEmailTextView = findViewById<TextView>(R.id.tv_user_email)
 
-        val firstName = sharedPreferences.getString("user_firstname", "Имя не указано")
-        val email = sharedPreferences.getString("user_email", "Email не указан")
+        val savedUsername = sharedPreferences.getString("user_username", "No username")
+        val savedEmail = sharedPreferences.getString("user_email", "No email")
 
-        userNameTextView.text = firstName
-        userEmailTextView.text = email
+        userNameTextView.text = savedUsername
+        userEmailTextView.text = savedEmail
 
+        // Обработка выбора аватарки
         pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val imageUri: Uri? = result.data?.data
@@ -50,14 +51,13 @@ class SettingsActivity : AppCompatActivity() {
             pickImageLauncher.launch(intent)
         }
 
-        // ✅ Обработка нажатия на кнопку "Profile"
-        val profileButton = findViewById<LinearLayout>(R.id.btn_profile)
-        profileButton.setOnClickListener {
+        // Переход на профиль
+        findViewById<LinearLayout>(R.id.btn_profile).setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
+        // Навигация через нижнее меню
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
         bottomNavigationView.selectedItemId = R.id.nav_settings
 
         bottomNavigationView.setOnItemSelectedListener { item ->

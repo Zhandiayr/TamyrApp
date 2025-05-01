@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.tamyrapp2.R
 import com.example.tamyrapp2.retrofit.retrofit.auth.AuthViewModel
-import com.example.tamyrapp2.UI.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
@@ -25,27 +24,30 @@ class LoginActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.user_pass)
         val btnSubmit = findViewById<Button>(R.id.button_submit)
         val tvError = findViewById<TextView>(R.id.tvError)
+        val tvSignUp = findViewById<TextView>(R.id.tv_sign_up) // Добавили обработку нажатия
 
         btnSubmit.setOnClickListener {
             viewModel.loginUser(etUsername.text.toString(), etPassword.text.toString())
         }
 
+        tvSignUp.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
         viewModel.accessToken.observe(this, Observer { token ->
             if (token != null) {
-                sharedPreferences.edit().putString("access_token", token).apply()
-                sharedPreferences.edit().putString("refresh_token", viewModel.refreshToken.value).apply()
-
-                // Сохраняем имя и email, если они пришли из ViewModel (например, после регистрации)
-                viewModel.userFirstName.value?.let { firstName ->
-                    sharedPreferences.edit().putString("user_firstname", firstName).apply()
-                }
-                viewModel.userEmail.value?.let { email ->
-                    sharedPreferences.edit().putString("user_email", email).apply()
+                sharedPreferences.edit().apply {
+                    putString("access_token", token)
+                    putString("refresh_token", viewModel.refreshToken.value)
+                    viewModel.userFirstName.value?.let { putString("user_firstname", it) }
+                    viewModel.userEmail.value?.let { putString("user_email", it) }
+                    apply()
                 }
 
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this, com.example.tamyrapp2.UI.HomeActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 finish()

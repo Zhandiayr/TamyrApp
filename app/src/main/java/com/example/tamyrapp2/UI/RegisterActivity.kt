@@ -20,33 +20,28 @@ class RegisterActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
 
-        val etUsername = findViewById<EditText>(R.id.user_login)
+        val etUsername = findViewById<EditText>(R.id.user_username)
         val etEmail = findViewById<EditText>(R.id.user_email)
-        val etPassword = findViewById<EditText>(R.id.user_pass)
-        val etFirstName = findViewById<EditText>(R.id.user_firstname)
-        val etLastName = findViewById<EditText>(R.id.user_lastname)
-        val btnRegister = findViewById<Button>(R.id.button_reg)
-        val tvResult = findViewById<TextView>(R.id.tvResult)
+        val etPassword = findViewById<EditText>(R.id.user_password)
+        val btnRegister = findViewById<Button>(R.id.button_register)
+        val tvResult = findViewById<TextView>(R.id.tvErrorRegister)
+        val tvLoginHere = findViewById<TextView>(R.id.tv_login_here) // ✨ Новый код
 
         btnRegister.setOnClickListener {
             viewModel.registerUser(
                 etUsername.text.toString(),
                 etEmail.text.toString(),
                 etPassword.text.toString(),
-                etFirstName.text.toString(),
-                etLastName.text.toString()
+                "none",
+                "none"
             )
         }
 
         viewModel.success.observe(this, Observer { isSuccess ->
             if (isSuccess) {
-                // ✅ Сохраняем имя и email в SharedPreferences
-                sharedPreferences.edit()
-                    .putString("user_firstname", etFirstName.text.toString())
-                    .putString("user_email", etEmail.text.toString())
-                    .apply()
+                saveUserInfo(etUsername.text.toString(), etEmail.text.toString())
 
-                Toast.makeText(this, "Регистрация успешна! Войдите в аккаунт.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Registration Successful! Please log in.", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
@@ -55,5 +50,19 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.error.observe(this, Observer { error ->
             tvResult.text = error
         })
+
+        // ✨ Обработка нажатия на "Login"
+        tvLoginHere.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun saveUserInfo(username: String, email: String) {
+        sharedPreferences.edit().apply {
+            putString("user_username", username)
+            putString("user_email", email)
+            apply()
+        }
     }
 }

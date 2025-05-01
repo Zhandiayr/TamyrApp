@@ -5,37 +5,304 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.HomeActivity">
+    tools:context=".UI.HomeActivity"
+    android:background="#F8F6F1">
 
+    <!-- Текст "Hi User!" -->
     <TextView
-        android:id="@+id/tv_welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome!"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tv_hi_user"
+        android:layout_width="281dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/raleway_bold"
+        android:letterSpacing="-0.01"
+        android:lineHeight="42sp"
+        android:text="👋🏻 Hi User!"
+        android:textColor="#432C81"
+        android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Аватарка справа -->
+    <ImageView
+        android:id="@+id/iv_profile_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_circle_profile"
+        android:padding="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/illustration_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_logout"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Блок "3 days ago" + Обновить -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_days_ago"
+        android:layout_width="329dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#EDECF4"
+        app:layout_constraintTop_toBottomOf="@id/iv_profile_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|start"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
+
+            <TextView
+                android:id="@+id/tv_days_ago"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="3 days ago"
+                android:textColor="#635C5C"
+                android:textSize="25sp"
+                android:fontFamily="@font/raleway_bold"
+                android:letterSpacing="-0.02"
+                android:gravity="center_vertical"
+                android:lineHeight="30sp"/>
+
+            <ImageView
+                android:id="@+id/iv_refresh"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_refresh"
+                android:alpha="0.55"
+                android:contentDescription="Refresh" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_heart_rate"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#F3F2FA"
+        app:layout_constraintTop_toBottomOf="@id/card_days_ago"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:gravity="start">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_heart_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_smart"
+                    android:contentDescription="Heart Icon" />
+
+                <TextView
+                    android:id="@+id/tv_heart_rate_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heart\nRate"
+                    android:textColor="#DE4143"
+                    android:textSize="30sp"
+                    android:fontFamily="@font/raleway_bold"
+                    android:lineHeight="24sp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_heart_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 bpm"
+                android:textColor="#DE4143"
+                android:textSize="40sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_marginTop="20dp"
+                android:gravity="center" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Блок Steps -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_steps"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#EDECF4"
+        app:layout_constraintTop_toBottomOf="@id/card_days_ago"
+        app:layout_constraintStart_toEndOf="@id/card_heart_rate">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:gravity="start">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_steps_icon"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:src="@drawable/ic_step"
+                    android:contentDescription="Steps Icon"
+                     />
+
+                <TextView
+                    android:id="@+id/tv_steps_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Steps"
+                    android:textColor="#8E900C"
+                    android:textSize="30sp"
+                    android:fontFamily="@font/raleway_bold"
+                    android:layout_marginStart="8dp"
+                    android:lineHeight="24sp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_steps_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 km"
+                android:textColor="#8E900C"
+                android:textSize="40sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_marginTop="29dp"
+                android:gravity="center" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_sleep"
+        android:layout_width="344dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#EDECF4"
+        app:layout_constraintTop_toBottomOf="@id/card_steps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_sleep_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_sleep"
+                android:contentDescription="Sleep Icon" />
+
+            <TextView
+                android:id="@+id/tv_sleep_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sleep"
+                android:textColor="#432C81"
+                android:textSize="40sp"
+                android:fontFamily="@font/raleway_bold"
+                android:gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:letterSpacing="-0.01"/>
+
+            <TextView
+                android:id="@+id/tv_sleep_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 hrs"
+                android:textColor="#432C81"
+                android:textSize="45sp"
+                android:fontFamily="@font/raleway_bold"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
 
     <Button
         android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log Out"
-        app:layout_constraintTop_toBottomOf="@id/tv_welcome"
+        app:layout_constraintTop_toBottomOf="@id/card_sleep"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="24dp"/>
+
+
+    <!-- Нижняя навигация -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FCFCF4"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
+            app:itemIconSize="32dp"
+            app:labelVisibilityMode="labeled"
+            android:background="#FCFCF4" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
