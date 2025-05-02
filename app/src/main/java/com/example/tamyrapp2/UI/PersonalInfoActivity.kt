@@ -1,92 +1,117 @@
-package com.example.tamyrapp2.UI
+package com.example.tamyrapp2.ui.personalInfo
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
-import com.example.tamyrapp2.data.network.RetrofitInstance
+import com.example.tamyrapp2.data.network.personalinfo.PersonalInfoViewModel
 import com.example.tamyrapp2.data.network.personalinfo.MainPersonalInfoRequest
-import android.util.Log
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.tamyrapp2.UI.HomeActivity
 
 class PersonalInfoActivity : AppCompatActivity() {
 
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var etName: EditText
+    private lateinit var etLastName: EditText
+    private lateinit var etAge: EditText
+    private lateinit var etHeight: EditText
+    private lateinit var etWeight: EditText
+    private lateinit var spinnerGender: Spinner
+    private lateinit var btnSave: Button
+    private val personalInfoViewModel: PersonalInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_info)
 
-        sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
+        // Инициализация элементов UI
+        etName = findViewById(R.id.et_name)
+        etLastName = findViewById(R.id.et_lastname)
+        etAge = findViewById(R.id.et_age)
+        etHeight = findViewById(R.id.et_height)
+        etWeight = findViewById(R.id.et_weight)
+        spinnerGender = findViewById(R.id.spinner_gender)
+        btnSave = findViewById(R.id.btn_save)
 
-        val etAge = findViewById<EditText>(R.id.et_age)
-        val etWeight = findViewById<EditText>(R.id.et_weight)
-        val etHeight = findViewById<EditText>(R.id.et_height)
-        val spSex = findViewById<Spinner>(R.id.sp_sex)
-        val btnSave = findViewById<Button>(R.id.btn_save)
+        // Инициализация Spinner для выбора пола
+        setupGenderSpinner()
 
-        val adapter = ArrayAdapter.createFromResource(
-            this, R.array.sex_options, android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spSex.adapter = adapter
-
+        // Обработка нажатия кнопки "Save Info"
         btnSave.setOnClickListener {
-            val age = etAge.text.toString().toIntOrNull() ?: 0
-            val weight = etWeight.text.toString().toIntOrNull() ?: 0
-            val height = etHeight.text.toString().toIntOrNull() ?: 0
-            val sex = spSex.selectedItem.toString()
+            handleSaveButtonClick()
+        }
 
-            if (age > 0 && weight > 0 && height > 0 && (sex == "Male" || sex == "Female")) {
-                savePersonalInfo(age, sex, weight, height)
-            } else {
-                Toast.makeText(this, "Заполните все поля корректно", Toast.LENGTH_SHORT).show()
-            }
+        // Наблюдатель для успешного сохранения данных
+        observeSuccess()
+
+        // Наблюдатель для ошибок
+        observeError()
+    }
+
+    private fun setupGenderSpinner() {
+        // Создаем список с вариантами пола
+        val genderOptions = listOf("Male", "Female")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderOptions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerGender.adapter = adapter
+    }
+
+    private fun handleSaveButtonClick() {
+        // Получаем данные с экрана
+        val name = etName.text.toString()
+        val lastName = etLastName.text.toString()
+        val age = etAge.text.toString().toIntOrNull()
+        val sex = spinnerGender.selectedItem.toString()
+        val weight = etWeight.text.toString().toIntOrNull()
+        val height = etHeight.text.toString().toIntOrNull()
+
+        // Проверяем, что все данные введены корректно
+        if (name.isNotEmpty() && lastName.isNotEmpty() && age != null && weight != null && height != null) {
+            // Отправляем данные через ViewModel
+            personalInfoViewModel.saveOrUpdatePersonalInfo(age, sex, weight, height)
+
+            // Сохраняем дополнительные данные (например, имя и фамилию) в SharedPreferences
+            saveUserName(name, lastName)
+        } else {
+            // Показываем ошибку, если данные невалидны
+            Toast.makeText(this, "Please fill all fields correctly", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun savePersonalInfo(age: Int, sex: String, weight: Int, height: Int) {
-        val token = sharedPreferences.getString("access_token", null)
-        val userId = sharedPreferences.getLong("user_id", -1)
-
-        if (token.isNullOrEmpty() || userId == -1L) {
-            Toast.makeText(this, "Ошибка: отсутствует access_token или userId", Toast.LENGTH_LONG).show()
-            return
+    private fun saveUserName(name: String, lastName: String) {
+        // Сохраняем имя и фамилию в SharedPreferences для дальнейшего использования
+        val sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
+        sharedPreferences.edit().apply {
+            putString("user_name", name)
+            putString("user_lastname", lastName)
+            apply()
         }
+    }
 
-        val request = MainPersonalInfoRequest(
-            userId = userId,
-            age = age,
-            sex = sex,
-            weight = weight,
-            height = height
-        )
+    private fun observeSuccess() {
+        personalInfoViewModel.success.observe(this, { success ->
+            if (success) {
+                // Информируем пользователя об успешном сохранении данных
+                Toast.makeText(this, "Information saved successfully!", Toast.LENGTH_SHORT).show()
 
-        Log.d("PersonalInfoActivity", "Отправка данных: $request")
+                // После успешного сохранения перенаправляем пользователя на страницу Home
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()  // Закрываем текущую активность
+            }
+        })
+    }
 
-        RetrofitInstance.personalInfoApi.saveOrUpdatePersonalInfo("Bearer $token", request)
-            .enqueue(object : Callback<Void> {
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    if (response.isSuccessful) {
-                        sharedPreferences.edit().putBoolean("personal_info_filled", true).apply()
-                        Toast.makeText(this@PersonalInfoActivity, "Анкета сохранена!", Toast.LENGTH_SHORT).show()
-
-                        val intent = Intent(this@PersonalInfoActivity, HomeActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
-                    } else {
-                        val errorBody = response.errorBody()?.string()
-                        Toast.makeText(this@PersonalInfoActivity, "Ошибка сохранения: ${response.code()} - $errorBody", Toast.LENGTH_LONG).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Toast.makeText(this@PersonalInfoActivity, "Ошибка сети: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
+    private fun observeError() {
+        personalInfoViewModel.error.observe(this, { errorMessage ->
+            errorMessage?.let {
+                // Показываем ошибку, если она произошла
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

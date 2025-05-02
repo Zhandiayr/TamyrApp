@@ -2,66 +2,325 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.PersonalInfoActivity">
+    android:background="#F8F6F1">
 
-    <!-- Ввод возраста -->
-    <EditText
-        android:id="@+id/et_age"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_age"
-        android:inputType="number"
+    <!-- Avatar -->
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="159dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/iv_avatar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="12dp" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Выбор пола -->
-    <Spinner
-        android:id="@+id/sp_sex"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/et_age"
+    <!-- Заголовок -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="343dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Please fill out the form"
+        android:textColor="#432C81"
+        android:textSize="24sp"
+        android:fontFamily="@font/raleway_bold"
+        android:gravity="center"
+        android:letterSpacing="-0.005"
+        android:lineHeight="32sp"
+        app:layout_constraintTop_toBottomOf="@id/iv_avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Ввод веса -->
-    <EditText
-        android:id="@+id/et_weight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_weight"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/sp_sex"
+    <!-- Бокс для имени -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_name"
+        android:layout_width="327dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="35dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FCFCF4"
+        app:strokeColor="#432C81"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="12dp" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Ввод роста -->
-    <EditText
-        android:id="@+id/et_height"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_height"
-        android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/et_weight"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/tv_label_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:          "
+                android:textColor="#432C81"
+                android:textSize="20sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_marginStart="10dp"/>
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Enter name"
+                android:background="@drawable/bg_edit_name"
+                android:textColor="#432C81"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:singleLine="true"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Бокс для фамилии -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_lastname"
+        android:layout_width="327dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FCFCF4"
+        app:strokeColor="#432C81"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/card_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="12dp" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Кнопка сохранения -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_label_lastname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name: "
+                android:textColor="#432C81"
+                android:textSize="20sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_marginStart="10dp"/>
+
+            <EditText
+                android:id="@+id/et_lastname"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Enter last name"
+                android:background="@drawable/bg_edit_name"
+                android:textColor="#432C81"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:singleLine="true"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Бокс для возраста -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_age"
+        android:layout_width="327dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FCFCF4"
+        app:strokeColor="#432C81"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/card_lastname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_label_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age:              "
+                android:textColor="#432C81"
+                android:textSize="20sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_marginStart="10dp"/>
+
+            <EditText
+                android:id="@+id/et_age"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_name"
+                android:hint="Enter age"
+                android:inputType="number"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:textColor="#432C81"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Бокс для Gender -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_gender"
+        android:layout_width="327dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FCFCF4"
+        app:strokeColor="#432C81"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/card_age"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_label_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender:       "
+                android:textColor="#432C81"
+                android:textSize="20sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_marginStart="10dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_gender"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_name"
+                android:padding="8dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Бокс для Height -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_height"
+        android:layout_width="327dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FCFCF4"
+        app:strokeColor="#432C81"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/card_gender"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_label_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height:         "
+                android:textColor="#432C81"
+                android:textSize="20sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_marginStart="10dp"/>
+
+            <EditText
+                android:id="@+id/et_height"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Enter height (cm)"
+                android:inputType="number"
+                android:background="@drawable/bg_edit_name"
+                android:textColor="#432C81"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:singleLine="true"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Бокс для Weight -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_weight"
+        android:layout_width="327dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FCFCF4"
+        app:strokeColor="#432C81"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/card_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_label_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight:        "
+                android:textColor="#432C81"
+                android:textSize="20sp"
+                android:fontFamily="@font/raleway_bold"
+                android:layout_marginStart="10dp"/>
+
+            <EditText
+                android:id="@+id/et_weight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Enter weight (kg)"
+                android:inputType="number"
+                android:background="@drawable/bg_edit_name"
+                android:textColor="#432C81"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:singleLine="true"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <Button
         android:id="@+id/btn_save"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/button_save"
-        app:layout_constraintTop_toBottomOf="@id/et_height"
+        android:layout_width="327dp"
+        android:layout_height="50dp"
+        android:text="Save Info"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#432C81"
+        app:layout_constraintTop_toBottomOf="@id/card_weight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="16dp"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="32dp"
+        android:background="@drawable/btn_login_background"
+        android:fontFamily="@font/raleway_bold"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
