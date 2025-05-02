@@ -7,10 +7,6 @@ import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
-import com.example.tamyrapp2.UI.LoginActivity
-import com.example.tamyrapp2.UI.NotificationsActivity
-import com.example.tamyrapp2.UI.SettingsActivity
-import com.example.tamyrapp2.UI.StatisticsActivity
 import com.example.tamyrapp2.presentation.miband.MiBandViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

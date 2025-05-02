@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.StatisticsActivity">
+    tools:context=".UI.StatisticsActivity"
+    android:background="#F8F6F1">
 
     <!-- Заголовок Statics -->
     <androidx.cardview.widget.CardView
@@ -26,7 +27,7 @@
             android:id="@+id/tv_statics"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Statics"
+            android:text="Statistics"
             android:textColor="#432C81"
             android:textSize="40sp"
             android:fontFamily="@font/raleway_bold"
@@ -187,14 +188,30 @@
     </androidx.cardview.widget.CardView>
 
     <!-- Нижняя навигация -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu"
+        android:orientation="vertical"
+        android:background="#FCFCF4"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
+            app:itemIconSize="32dp"
+            app:labelVisibilityMode="labeled"
+            android:background="#FCFCF4"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

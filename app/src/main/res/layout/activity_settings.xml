@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.SettingsActivity">
+    tools:context=".UI.SettingsActivity"
+    android:background="#F8F6F1">
 
     <!-- Заголовок -->
     <TextView
@@ -16,6 +17,8 @@
         android:text="Settings"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#432C81"
+        android:fontFamily="@font/raleway_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +141,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_notifications"
+            android:src="@drawable/ic_notifications1"
             android:contentDescription="Notifications icon" />
 
         <TextView
@@ -202,57 +205,31 @@
             android:contentDescription="Arrow icon" />
     </LinearLayout>
 
-    <!-- Language button -->
+
+    <!-- Нижняя навигация -->
     <LinearLayout
-        android:id="@+id/btn_language"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        android:background="@drawable/profile_item_background"
-        android:gravity="center_vertical"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@id/btn_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FCFCF4"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_notifications"
-            android:contentDescription="Language icon" />
-
-        <TextView
-            android:layout_width="0dp"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_weight="1"
-            android:text="Language"
-            android:textColor="#56428F"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            app:tint="#A095C1"
-            android:src="@drawable/baseline_keyboard_arrow_right_24"
-            android:contentDescription="Arrow icon" />
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
+            app:itemIconSize="32dp"
+            app:labelVisibilityMode="labeled"
+            android:background="#FCFCF4"/>
     </LinearLayout>
-
-    <!-- Нижняя навигация -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavActiveIndicator" parent="">
+        <item name="android:scaleX">1.3</item> <!-- Увеличение по X -->
+        <item name="android:scaleY">1.3</item> <!-- Увеличение по Y -->
+        <item name="android:backgroundTint">@android:color/transparent</item> <!-- Без фона -->
+    </style>
+</resources>

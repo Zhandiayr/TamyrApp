@@ -25,10 +25,17 @@ class LoginActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.user_pass)
         val btnSubmit = findViewById<Button>(R.id.button_submit)
         val tvError = findViewById<TextView>(R.id.tvError)
+        val tvSignUp = findViewById<TextView>(R.id.tv_sign_up)
 
         btnSubmit.setOnClickListener {
             viewModel.loginUser(etUsername.text.toString(), etPassword.text.toString())
         }
+
+        tvSignUp.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
 
         viewModel.accessToken.observe(this, Observer { token ->
             if (token != null) {
