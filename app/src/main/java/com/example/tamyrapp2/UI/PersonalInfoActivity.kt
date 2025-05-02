@@ -1,4 +1,4 @@
-package com.example.tamyrapp2.ui.personalInfo
+package com.example.tamyrapp2.UI
 
 import android.content.Intent
 import android.os.Bundle

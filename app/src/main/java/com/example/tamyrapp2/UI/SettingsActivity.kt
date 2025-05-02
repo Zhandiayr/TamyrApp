@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.tamyrapp2.UI.PersonalInfoActivity
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -54,6 +55,12 @@ class SettingsActivity : AppCompatActivity() {
         val profileButton = findViewById<LinearLayout>(R.id.btn_profile)
         profileButton.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
+        val notificationsButton = findViewById<LinearLayout>(R.id.btn_notifications)
+        notificationsButton.setOnClickListener {
+            // Переход на активность MainPersonalInfoActivity
+            startActivity(Intent(this, PersonalInfoActivity::class.java))
         }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
