@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
 import com.example.tamyrapp2.presentation.lifestyle.LifestyleInfoViewModel
+import androidx.appcompat.widget.SwitchCompat
 
 class LifestyleInfoActivity : AppCompatActivity() {
 
@@ -15,9 +16,9 @@ class LifestyleInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lifestyle_info)
 
-        val switchSmoking = findViewById<Switch>(R.id.switch_smoking)
-        val switchAlcohol = findViewById<Switch>(R.id.switch_alcohol)
-        val switchExercise = findViewById<Switch>(R.id.switch_exercise)
+        val switchSmoking = findViewById<SwitchCompat>(R.id.switch_smoking)
+        val switchAlcohol = findViewById<SwitchCompat>(R.id.switch_alcohol)
+        val switchExercise = findViewById<SwitchCompat>(R.id.switch_exercise)
         val spinnerFruitIntake = findViewById<Spinner>(R.id.spinner_fruit_intake)
         val buttonSave = findViewById<Button>(R.id.button_save_lifestyle)
 
@@ -33,7 +34,9 @@ class LifestyleInfoActivity : AppCompatActivity() {
             val fruitIntake = spinnerFruitIntake.selectedItem.toString()
 
             viewModel.saveLifestyleInfo(smokes, drinksAlcohol, exercises, fruitIntake)
+
             Toast.makeText(this, "Lifestyle Info Sent!", Toast.LENGTH_SHORT).show()
+
             finish()
         }
     }

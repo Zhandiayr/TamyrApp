@@ -1,5 +1,6 @@
 package com.example.tamyrapp2.UI
 
+import android.util.Log
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.tamyrapp2.UI.PersonalInfoActivity
+import com.example.tamyrapp2.UI.LifestyleInfoActivity
+
+
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -62,6 +67,16 @@ class SettingsActivity : AppCompatActivity() {
             // Переход на активность MainPersonalInfoActivity
             startActivity(Intent(this, PersonalInfoActivity::class.java))
         }
+        // ✅ Обработка нажатия на кнопку "LifeData"
+        val lifeDataButton = findViewById<LinearLayout>(R.id.btn_life_data)
+        lifeDataButton.setOnClickListener {
+            // Переход на активность LifestyleInfoActivity
+            startActivity(Intent(this, LifestyleInfoActivity::class.java))
+        }
+
+
+
+
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 

@@ -49,6 +49,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".UI.LifestyleInfoActivity" />
+
         <!-- Экран регистрации -->
         <activity
             android:name=".UI.RegisterActivity"
@@ -84,7 +87,6 @@
         <activity
             android:name=".UI.ProfileActivity"
             android:exported="true" />
-
 
     </application>
 

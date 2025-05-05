@@ -6,13 +6,19 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
+    <!-- Курение -->
+
+    <!-- Употребление алкоголя -->
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_smoking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Курение"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_alcohol"
@@ -23,6 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"/>
 
+    <!-- Занятия спортом -->
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_exercise"
         android:layout_width="wrap_content"
@@ -32,6 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"/>
 
+    <!-- Потребление фруктов -->
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_fruit_intake"
         android:layout_width="0dp"
@@ -42,8 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
 
-
-
+    <!-- Кнопка Сохранить -->
     <Button
         android:id="@+id/button_save_lifestyle"
         android:layout_width="wrap_content"
@@ -54,3 +61,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
