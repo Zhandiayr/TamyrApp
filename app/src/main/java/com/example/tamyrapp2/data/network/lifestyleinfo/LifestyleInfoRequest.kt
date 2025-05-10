@@ -1,3 +1,4 @@
+
 package com.example.tamyrapp2.data.network.lifestyle
 
 data class LifestyleInfoRequest(

@@ -1,3 +1,4 @@
+
 package com.example.tamyrapp2.data.network.auth
 
 data class AuthResponse(
