@@ -58,37 +58,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
         })
     }
-    /*
-    fun loginUser(username: String, password: String) {
-        val request = LoginRequest(username, password)
-        RetrofitInstance.authApi.loginUser(request).enqueue(object : Callback<AuthResponse> { // <-- исправил тут
-            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                if (response.isSuccessful) {
-                    val authResponse = response.body()
-
-                    _accessToken.value = authResponse?.accessToken
-                    _refreshToken.value = authResponse?.refreshToken
-                    _userId.value = authResponse?.userId
-
-                    with(sharedPreferences.edit()) {
-                        putString("access_token", authResponse?.accessToken)
-                        putString("refresh_token", authResponse?.refreshToken)
-                        putLong("user_id", authResponse?.userId ?: -1)
-                        apply()
-                    }
-
-                    scheduleTokenRefresh()
-                } else {
-                    _error.value = response.errorBody()?.string() ?: "Ошибка входа: ${response.code()}"
-                }
-            }
-
-            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                _error.value = "Ошибка сети: ${t.message}"
-            }
-        })
-    }
-     */
     fun loginUser(username: String, password: String) {
         val request = LoginRequest(username, password)
         RetrofitInstance.authApi.loginUser(request).enqueue(object : Callback<AuthResponse> {
@@ -144,23 +113,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
         })
     }
-    /*
-    private fun scheduleTokenRefresh() {
-        // ✅ Сначала отменяем ВСЕ старые задачи
-        workManager.cancelAllWork()
-
-        // ✅ Потом ставим новую задачу на обновление токена
-        val workRequest = PeriodicWorkRequestBuilder<TokenRefreshWorker>(1, TimeUnit.HOURS)
-            .setInitialDelay(1, TimeUnit.HOURS)
-            .build()
-
-        workManager.enqueueUniquePeriodicWork(
-            "TokenRefreshWorker",
-            ExistingPeriodicWorkPolicy.REPLACE,
-            workRequest
-        )
-    }
-    */
     private fun scheduleTokenRefresh() {
         val workRequest = PeriodicWorkRequestBuilder<TokenRefreshWorker>(1, TimeUnit.HOURS)
             .setInitialDelay(1, TimeUnit.HOURS)
