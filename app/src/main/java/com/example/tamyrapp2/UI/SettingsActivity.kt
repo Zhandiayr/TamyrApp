@@ -62,11 +62,7 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
-        val notificationsButton = findViewById<LinearLayout>(R.id.btn_notifications)
-        notificationsButton.setOnClickListener {
-            // Переход на активность MainPersonalInfoActivity
-            startActivity(Intent(this, PersonalInfoActivity::class.java))
-        }
+
         // ✅ Обработка нажатия на кнопку "LifeData"
         val lifeDataButton = findViewById<LinearLayout>(R.id.btn_life_data)
         lifeDataButton.setOnClickListener {

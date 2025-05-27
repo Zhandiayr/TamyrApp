@@ -43,16 +43,19 @@ class HomeActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 R.id.nav_notifications -> {
                     startActivity(Intent(this, NotificationsActivity::class.java))
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 R.id.nav_settings -> {
                     startActivity(Intent(this, SettingsActivity::class.java))
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 else -> false
             }
         }
@@ -67,6 +70,7 @@ class HomeActivity : AppCompatActivity() {
             remove("user_email")
             remove("user_name")
             remove("user_lastname")
+            // ❗ НЕ УДАЛЯЕМ profile_filled_user_!!!
             apply()
         }
 
@@ -75,5 +79,6 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
 }

@@ -1,32 +1,32 @@
 
-package com.example.tamyrapp2.data.network.auth
-import android.content.Context
-import androidx.work.Worker
-import androidx.work.WorkerParameters
-import com.example.tamyrapp2.data.network.RetrofitInstance
-class TokenRefreshWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+    package com.example.tamyrapp2.data.network.auth
+    import android.content.Context
+    import androidx.work.Worker
+    import androidx.work.WorkerParameters
+    import com.example.tamyrapp2.data.network.RetrofitInstance
+    class TokenRefreshWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
-    override fun doWork(): Result {
-        val sharedPreferences = applicationContext.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
-        val refreshToken = sharedPreferences.getString("refresh_token", null)
+        override fun doWork(): Result {
+            val sharedPreferences = applicationContext.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+            val refreshToken = sharedPreferences.getString("refresh_token", null)
 
-        if (refreshToken.isNullOrEmpty()) {
-            return Result.failure()
-        }
-
-        val response = try {
-            RetrofitInstance.authApi.refreshToken("Bearer $refreshToken").execute()
-        } catch (e: Exception) {
-            return Result.retry()
-        }
-
-        return if (response.isSuccessful) {
-            response.body()?.accessToken?.let { newToken ->
-                sharedPreferences.edit().putString("access_token", newToken).apply()
+            if (refreshToken.isNullOrEmpty()) {
+                return Result.failure()
             }
-            Result.success()
-        } else {
-            Result.retry()
+
+            val response = try {
+                RetrofitInstance.authApi.refreshToken("Bearer $refreshToken").execute()
+            } catch (e: Exception) {
+                return Result.retry()
+            }
+
+            return if (response.isSuccessful) {
+                response.body()?.accessToken?.let { newToken ->
+                    sharedPreferences.edit().putString("access_token", newToken).apply()
+                }
+                Result.success()
+            } else {
+                Result.retry()
+            }
         }
     }
-}

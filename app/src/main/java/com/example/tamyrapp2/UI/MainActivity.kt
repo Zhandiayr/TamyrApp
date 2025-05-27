@@ -9,6 +9,14 @@ import com.example.tamyrapp2.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        getSharedPreferences("auth_prefs", MODE_PRIVATE)
+            .edit()
+            .clear()
+            .apply()
+
+
         setContentView(R.layout.activity_main)
 
         val btnLogin = findViewById<Button>(R.id.button_login)

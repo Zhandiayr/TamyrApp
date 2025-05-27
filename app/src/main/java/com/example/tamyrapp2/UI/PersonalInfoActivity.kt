@@ -1,21 +1,18 @@
 package com.example.tamyrapp2.UI
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
+import android.util.Log
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
 import com.example.tamyrapp2.data.network.personalinfo.PersonalInfoViewModel
-import com.example.tamyrapp2.data.network.personalinfo.MainPersonalInfoRequest
-import com.example.tamyrapp2.UI.HomeActivity
 
 class PersonalInfoActivity : AppCompatActivity() {
 
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var etName: EditText
     private lateinit var etLastName: EditText
     private lateinit var etAge: EditText
@@ -29,7 +26,8 @@ class PersonalInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_info)
 
-        // Инициализация элементов UI
+        sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
+
         etName = findViewById(R.id.et_name)
         etLastName = findViewById(R.id.et_lastname)
         etAge = findViewById(R.id.et_age)
@@ -38,31 +36,19 @@ class PersonalInfoActivity : AppCompatActivity() {
         spinnerGender = findViewById(R.id.spinner_gender)
         btnSave = findViewById(R.id.btn_save)
 
-        // Инициализация Spinner для выбора пола
         setupGenderSpinner()
-
-        // Обработка нажатия кнопки "Save Info"
-        btnSave.setOnClickListener {
-            handleSaveButtonClick()
-        }
-
-        // Наблюдатель для успешного сохранения данных
+        btnSave.setOnClickListener { handleSaveButtonClick() }
         observeSuccess()
-
-        // Наблюдатель для ошибок
         observeError()
     }
 
     private fun setupGenderSpinner() {
-        // Создаем список с вариантами пола
-        val genderOptions = listOf("Male", "Female")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, genderOptions)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOf("Male", "Female"))
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerGender.adapter = adapter
     }
 
     private fun handleSaveButtonClick() {
-        // Получаем данные с экрана
         val name = etName.text.toString()
         val lastName = etLastName.text.toString()
         val age = etAge.text.toString().toIntOrNull()
@@ -70,22 +56,15 @@ class PersonalInfoActivity : AppCompatActivity() {
         val weight = etWeight.text.toString().toIntOrNull()
         val height = etHeight.text.toString().toIntOrNull()
 
-        // Проверяем, что все данные введены корректно
         if (name.isNotEmpty() && lastName.isNotEmpty() && age != null && weight != null && height != null) {
-            // Отправляем данные через ViewModel
             personalInfoViewModel.saveOrUpdatePersonalInfo(age, sex, weight, height)
-
-            // Сохраняем дополнительные данные (например, имя и фамилию) в SharedPreferences
             saveUserName(name, lastName)
         } else {
-            // Показываем ошибку, если данные невалидны
             Toast.makeText(this, "Please fill all fields correctly", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun saveUserName(name: String, lastName: String) {
-        // Сохраняем имя и фамилию в SharedPreferences для дальнейшего использования
-        val sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
         sharedPreferences.edit().apply {
             putString("user_name", name)
             putString("user_lastname", lastName)
@@ -94,24 +73,27 @@ class PersonalInfoActivity : AppCompatActivity() {
     }
 
     private fun observeSuccess() {
-        personalInfoViewModel.success.observe(this, { success ->
+        personalInfoViewModel.success.observe(this) { success ->
             if (success) {
-                // Информируем пользователя об успешном сохранении данных
+                val userId = sharedPreferences.getLong("user_id", -1L)
+                if (userId != -1L) {
+                    val profileKey = "profile_filled_user_$userId"
+                    Log.d("PERSONAL_INFO", "Setting flag $profileKey = true")
+                    sharedPreferences.edit().putBoolean(profileKey, true).apply()
+                }
                 Toast.makeText(this, "Information saved successfully!", Toast.LENGTH_SHORT).show()
-
-                // После успешного сохранения перенаправляем пользователя на страницу Home
                 startActivity(Intent(this, HomeActivity::class.java))
-                finish()  // Закрываем текущую активность
+                finish()
             }
-        })
+        }
     }
 
     private fun observeError() {
-        personalInfoViewModel.error.observe(this, { errorMessage ->
+        personalInfoViewModel.error.observe(this) { errorMessage ->
             errorMessage?.let {
-                // Показываем ошибку, если она произошла
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 }
+
