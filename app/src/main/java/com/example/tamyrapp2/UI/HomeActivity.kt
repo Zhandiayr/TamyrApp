@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
 import com.example.tamyrapp2.presentation.miband.MiBandViewModel
-import com.example.tamyrapp2.UI.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
@@ -71,7 +70,6 @@ class HomeActivity : AppCompatActivity() {
             remove("user_email")
             remove("user_name")
             remove("user_lastname")
-            // ❗ НЕ УДАЛЯЕМ profile_filled_user_!!!
             apply()
         }
 

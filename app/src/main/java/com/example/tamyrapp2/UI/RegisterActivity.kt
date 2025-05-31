@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.tamyrapp2.R
 import com.example.tamyrapp2.data.network.auth.AuthViewModel
-import com.example.tamyrapp2.UI.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
@@ -26,7 +25,7 @@ class RegisterActivity : AppCompatActivity() {
         val etPassword = findViewById<EditText>(R.id.user_password)
         val btnRegister = findViewById<Button>(R.id.button_register)
         val tvResult = findViewById<TextView>(R.id.tvErrorRegister)
-        val tvLoginHere = findViewById<TextView>(R.id.tv_login_here) // ✨ Новый код
+        val tvLoginHere = findViewById<TextView>(R.id.tv_login_here)
 
         btnRegister.setOnClickListener {
             viewModel.registerUser(
@@ -52,7 +51,6 @@ class RegisterActivity : AppCompatActivity() {
             tvResult.text = error
         })
 
-        // ✨ Обработка нажатия на "Login"
         tvLoginHere.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()

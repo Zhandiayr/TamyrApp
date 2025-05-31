@@ -1,6 +1,5 @@
 package com.example.tamyrapp2.UI
 
-import android.util.Log
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,11 +13,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.example.tamyrapp2.UI.PersonalInfoActivity
-import com.example.tamyrapp2.UI.LifestyleInfoActivity
-
-
-
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -33,7 +27,6 @@ class SettingsActivity : AppCompatActivity() {
         profileImage = findViewById(R.id.profile_image)
         sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
 
-        // Устанавливаем имя и email пользователя из SharedPreferences
         val userNameTextView = findViewById<TextView>(R.id.tv_user_name)
         val userEmailTextView = findViewById<TextView>(R.id.tv_user_email)
 
@@ -56,17 +49,14 @@ class SettingsActivity : AppCompatActivity() {
             pickImageLauncher.launch(intent)
         }
 
-        // ✅ Обработка нажатия на кнопку "Profile"
         val profileButton = findViewById<LinearLayout>(R.id.btn_profile)
         profileButton.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
 
-        // ✅ Обработка нажатия на кнопку "LifeData"
         val lifeDataButton = findViewById<LinearLayout>(R.id.btn_life_data)
         lifeDataButton.setOnClickListener {
-            // Переход на активность LifestyleInfoActivity
             startActivity(Intent(this, LifestyleInfoActivity::class.java))
         }
 

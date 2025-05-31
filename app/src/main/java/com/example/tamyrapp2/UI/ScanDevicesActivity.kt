@@ -1,4 +1,4 @@
-package com.example.tamyrapp2.ui // Переименовано с UI → ui (с маленькой буквы)
+package com.example.tamyrapp2.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -22,7 +22,7 @@ import com.example.tamyrapp2.R
 import com.example.tamyrapp2.UI.DevicesAdapter
 import com.example.tamyrapp2.presentation.miband.MiBandConnectViewModel
 
-@SuppressLint("MissingPermission") // добавлено для методов внутри проверок
+@SuppressLint("MissingPermission")
 class ScanDevicesActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView

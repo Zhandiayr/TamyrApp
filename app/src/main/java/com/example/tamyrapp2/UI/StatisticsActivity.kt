@@ -13,10 +13,8 @@ class StatisticsActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        // Выбираем текущий пункт меню
         bottomNavigationView.selectedItemId = R.id.nav_statistics
 
-        // Обработка нажатий на пункты меню
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
