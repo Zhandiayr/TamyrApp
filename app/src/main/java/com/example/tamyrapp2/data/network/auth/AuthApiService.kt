@@ -12,7 +12,6 @@ interface AuthApiService {
 
 package com.example.tamyrapp2.data.network.auth
 
-
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header

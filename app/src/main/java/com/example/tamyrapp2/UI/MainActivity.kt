@@ -11,10 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        getSharedPreferences("auth_prefs", MODE_PRIVATE)
-            .edit()
-            .clear()
-            .apply()
 
 
         setContentView(R.layout.activity_main)
