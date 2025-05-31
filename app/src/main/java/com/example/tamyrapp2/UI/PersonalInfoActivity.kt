@@ -56,8 +56,11 @@ class PersonalInfoActivity : AppCompatActivity() {
         val weight = etWeight.text.toString().toIntOrNull()
         val height = etHeight.text.toString().toIntOrNull()
 
-        if (name.isNotEmpty() && lastName.isNotEmpty() && age != null && weight != null && height != null) {
-            personalInfoViewModel.saveOrUpdatePersonalInfo(age, sex, weight, height)
+        if (name.isNotBlank() && lastName.isNotBlank() &&
+            age != null && age in 1..120 && weight != null && weight in 30..300 &&
+            height != null && height in 50..250)
+        {
+            personalInfoViewModel.saveOrUpdatePersonalInfo(name, lastName, age, sex, weight, height)
             saveUserName(name, lastName)
         } else {
             Toast.makeText(this, "Please fill all fields correctly", Toast.LENGTH_SHORT).show()

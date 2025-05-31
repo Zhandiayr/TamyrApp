@@ -77,9 +77,11 @@
             android:layout_marginBottom="4dp"
             android:background="@drawable/edit_icon_background"
             android:padding="6dp"
-            android:src="@drawable/ic_edit"
+            android:src="@drawable/ic_edit2"
+            android:contentDescription="Edit avatar icon"
             app:layout_constraintBottom_toBottomOf="@id/profile_image"
             app:layout_constraintEnd_toEndOf="@id/profile_image" />
+
 
         <!-- Поля профиля -->
         <LinearLayout
@@ -107,14 +109,18 @@
                     android:textSize="16sp"
                     android:textColor="#432C81" />
 
-                <TextView
-                    android:id="@+id/tv_name_value"
+                <EditText
+                    android:id="@+id/edit_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="User"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="8dp"
+                    android:minEms="4"
+                    android:inputType="textPersonName"
+                    android:hint="Name"
                     android:textSize="16sp"
                     android:textColor="#432C81"
-                    android:layout_marginEnd="8dp" />
+                    android:background="@android:color/transparent"
+                    android:padding="12dp" />
 
                 <ImageView
                     android:layout_width="16dp"
@@ -140,14 +146,18 @@
                     android:textSize="16sp"
                     android:textColor="#432C81" />
 
-                <TextView
-                    android:id="@+id/tv_surname_value"
+                <EditText
+                    android:id="@+id/edit_surname"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="User"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="8dp"
+                    android:minEms="4"
+                    android:inputType="textPersonName"
+                    android:hint="Surname"
                     android:textSize="16sp"
                     android:textColor="#432C81"
-                    android:layout_marginEnd="8dp" />
+                    android:background="@android:color/transparent"
+                    android:padding="12dp" />
 
                 <ImageView
                     android:layout_width="16dp"
@@ -174,14 +184,21 @@
                     android:textSize="16sp"
                     android:textColor="#432C81" />
 
-                <TextView
-                    android:id="@+id/tv_age_value"
+                <EditText
+                    android:id="@+id/edit_age"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="21"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="8dp"
+                    android:minEms="4"
+                    android:inputType="number"
+                    android:hint="Age"
+                    android:importantForAutofill="yes"
+                    android:autofillHints="age"
                     android:textSize="16sp"
                     android:textColor="#432C81"
-                    android:layout_marginEnd="8dp" />
+                    android:background="@android:color/transparent"
+                    android:padding="12dp" />
+
 
                 <ImageView
                     android:layout_width="16dp"
@@ -189,6 +206,7 @@
                     android:src="@drawable/ic_arrow_right"
                     android:contentDescription="Next" />
             </LinearLayout>
+            <!-- Gender -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -207,14 +225,17 @@
                     android:textSize="16sp"
                     android:textColor="#432C81" />
 
-                <TextView
-                    android:id="@+id/tv_gender_value"
+                <Spinner
+                    android:id="@+id/spinner_gender"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Female"
-                    android:textSize="16sp"
-                    android:textColor="#432C81"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="12dp"
+                    android:spinnerMode="dropdown"
+                    android:popupBackground="#FFFFFF"
+                    android:background="@android:color/transparent"
+                    android:entries="@array/sex_options" />
 
                 <ImageView
                     android:layout_width="16dp"
@@ -222,6 +243,7 @@
                     android:src="@drawable/ic_arrow_right"
                     android:contentDescription="Next" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -240,14 +262,21 @@
                     android:textSize="16sp"
                     android:textColor="#432C81" />
 
-                <TextView
-                    android:id="@+id/tv_weight_value"
+                <EditText
+                    android:id="@+id/edit_weight"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="72 kg"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="8dp"
+                    android:minEms="4"
+                    android:inputType="number"
+                    android:hint="Weight"
+                    android:importantForAutofill="yes"
+                    android:autofillHints="weight"
                     android:textSize="16sp"
                     android:textColor="#432C81"
-                    android:layout_marginEnd="8dp" />
+                    android:background="@android:color/transparent"
+                    android:padding="12dp" />
+
 
                 <ImageView
                     android:layout_width="16dp"
@@ -273,14 +302,22 @@
                     android:textSize="16sp"
                     android:textColor="#432C81" />
 
-                <TextView
-                    android:id="@+id/tv_height_value"
+                <EditText
+                    android:id="@+id/edit_height"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="181 cm"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="8dp"
+                    android:minEms="4"
+                    android:inputType="number"
+                    android:hint="Height"
+                    android:importantForAutofill="yes"
+                    android:autofillHints="height"
                     android:textSize="16sp"
                     android:textColor="#432C81"
-                    android:layout_marginEnd="8dp" />
+                    android:background="@android:color/transparent"
+                    android:padding="12dp" />
+
+
 
                 <ImageView
                     android:layout_width="16dp"
