@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FCFCF4"
-    android:padding="35dp" >
+    android:padding="16dp" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Lifedata Survey"
-                android:textSize="27sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#432C81"
                 android:fontFamily="@font/raleway_bold" />
@@ -59,7 +59,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Do you smoke?"
-                    android:textSize="20dp"
+                    android:textSize="18sp"
                     android:textColor="#432C81"
                     android:fontFamily="@font/raleway_bold" />
 
@@ -86,7 +86,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Do you consume alcohol?"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#432C81"
                     android:fontFamily="@font/raleway_bold" />
 
@@ -113,7 +113,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Do you engage in regular physical activity?"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="#432C81"
                     android:fontFamily="@font/raleway_bold" />
 
@@ -126,33 +126,13 @@
             </LinearLayout>
 
             <!-- Spinner -->
-            <LinearLayout
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_fruit_intake"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginTop="24dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="12dp"
-                android:background="@drawable/bg_profile_field">
+                android:background="@drawable/bg_profile_field" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Do you consume fruits and vegetables daily?"
-                    android:textSize="18sp"
-                    android:textColor="#432C81"
-                    android:fontFamily="@font/raleway_bold"
-                    android:maxLines="2"
-                    android:ellipsize="end"/>
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinner_fruit_intake"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_profile_field"/>
-
-            </LinearLayout>
             <!-- Кнопка Сохранить -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -221,5 +201,29 @@
     </ScrollView>
 
     <!-- Навигация -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FCFCF4"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/nav_item_color"
+            app:itemTextColor="@color/nav_item_color"
+            app:itemIconSize="32dp"
+            app:labelVisibilityMode="labeled"
+            android:background="#FCFCF4"/>
+    </LinearLayout>
 </LinearLayout>

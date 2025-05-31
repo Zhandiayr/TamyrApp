@@ -199,12 +199,12 @@
                 android:id="@+id/tv_steps_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="29dp"
+                android:fontFamily="@font/raleway_bold"
+                android:gravity="center"
                 android:text="0 km"
                 android:textColor="#8E900C"
-                android:textSize="40sp"
-                android:fontFamily="@font/raleway_bold"
-                android:layout_marginTop="29dp"
-                android:gravity="center" />
+                android:textSize="40sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
