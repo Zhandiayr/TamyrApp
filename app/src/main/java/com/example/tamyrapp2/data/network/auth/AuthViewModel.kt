@@ -36,24 +36,24 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun cleanupObsoleteWorkers() {
         val workManager = WorkManager.getInstance(getApplication<Application>())
-        workManager.pruneWork() // Удаляет все старые сломанные задачи
+        workManager.pruneWork()
     }
 
     fun registerUser(username: String, email: String, password: String, firstName: String, lastName: String) {
         val request = RegisterRequest(username, email, password, firstName, lastName)
-        RetrofitInstance.authApi.registerUser(request).enqueue(object : Callback<Void> { // <-- исправил тут
+        RetrofitInstance.authApi.registerUser(request).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     userFirstName.value = firstName
                     userEmail.value = email
                     _success.value = true
                 } else {
-                    _error.value = response.errorBody()?.string() ?: "Ошибка регистрации: ${response.code()}"
+                    _error.value = response.errorBody()?.string() ?: "Registration error: ${response.code()}"
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                _error.value = "Ошибка сети: ${t.message}"
+                _error.value = "Network error: ${t.message}"
             }
         })
     }
@@ -75,15 +75,15 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                         apply()
                     }
 
-                    cleanupObsoleteWorkers() // <--- Сначала чистим мусор
-                    scheduleTokenRefresh()   // <--- Потом ставим новый воркер
+                    cleanupObsoleteWorkers()
+                    scheduleTokenRefresh()
                 } else {
-                    _error.value = response.errorBody()?.string() ?: "Ошибка входа: ${response.code()}"
+                    _error.value = response.errorBody()?.string() ?: "Login error: ${response.code()}"
                 }
             }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                _error.value = "Ошибка сети: ${t.message}"
+                _error.value = "Network error: ${t.message}"
             }
         })
     }
@@ -91,7 +91,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     fun refreshAccessToken() {
         val refreshToken = sharedPreferences.getString("refresh_token", null)
         if (refreshToken.isNullOrEmpty()) {
-            _error.value = "Отсутствует refresh токен"
+            _error.value = "Refresh token is missing"
             return
         }
 
@@ -103,12 +103,12 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
                     sharedPreferences.edit().putString("access_token", newToken).apply()
                 } else {
-                    _error.value = response.errorBody()?.string() ?: "Ошибка обновления токена: ${response.code()}"
+                    _error.value = response.errorBody()?.string() ?: "Token update error: ${response.code()}"
                 }
             }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                _error.value = "Ошибка сети: ${t.message}"
+                _error.value = "Network error: ${t.message}"
             }
         })
     }

@@ -1,5 +1,4 @@
 package com.example.tamyrapp2.UI
-
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences

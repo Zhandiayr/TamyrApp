@@ -39,12 +39,12 @@ class LifestyleInfoViewModel(application: Application) : AndroidViewModel(applic
                     if (response.isSuccessful) {
                         _success.value = true
                     } else {
-                        _error.value = "Ошибка сохранения: ${response.code()}"
+                        _error.value = "Save error: ${response.code()}"
                     }
                 }
 
                 override fun onFailure(call: Call<LifestyleInfoRequest>, t: Throwable) {
-                    _error.value = "Ошибка сети: ${t.message}"
+                    _error.value = "Network error: ${t.message}"
                 }
             })
     }

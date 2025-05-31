@@ -92,7 +92,7 @@ class PersonalInfoViewModel(application: Application) : AndroidViewModel(applica
         val userId = sharedPreferences.getLong("user_id", -1)
 
         if (accessToken.isNullOrEmpty() || userId == -1L) {
-            _error.value = "Ошибка авторизации: токен или ID пользователя отсутствует"
+            _error.value = "Authorization error: token or user ID missing"
             return
         }
 
@@ -111,12 +111,12 @@ class PersonalInfoViewModel(application: Application) : AndroidViewModel(applica
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     _success.value = response.isSuccessful
                     if (!response.isSuccessful) {
-                        _error.value = response.errorBody()?.string() ?: "Ошибка сохранения: ${response.code()}"
+                        _error.value = response.errorBody()?.string() ?: "Save error: ${response.code()}"
                     }
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    _error.value = "Ошибка сети: ${t.message}"
+                    _error.value = "Network error: ${t.message}"
                 }
             })
     }
@@ -126,7 +126,7 @@ class PersonalInfoViewModel(application: Application) : AndroidViewModel(applica
         val userId = sharedPreferences.getLong("user_id", -1)
 
         if (accessToken.isNullOrEmpty() || userId == -1L) {
-            _error.value = "Ошибка авторизации: токен или ID пользователя отсутствует"
+            _error.value = "Authorization error: token or user ID missing"
             return
         }
 
@@ -139,12 +139,12 @@ class PersonalInfoViewModel(application: Application) : AndroidViewModel(applica
                     if (response.isSuccessful && response.body() != null) {
                         _personalInfo.value = response.body()
                     } else {
-                        _error.value = "Ошибка загрузки данных: ${response.code()}"
+                        _error.value = "Data loading error: ${response.code()}"
                     }
                 }
 
                 override fun onFailure(call: Call<MainPersonalInfoRequest>, t: Throwable) {
-                    _error.value = "Ошибка сети: ${t.message}"
+                    _error.value = "Network error: ${t.message}"
                 }
             })
     }

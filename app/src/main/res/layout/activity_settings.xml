@@ -71,7 +71,7 @@
         android:layout_marginBottom="4dp"
         android:background="@drawable/edit_icon_background"
         android:padding="6dp"
-        android:src="@drawable/ic_edit2"
+        android:src="@drawable/ic_edit"
         app:layout_constraintBottom_toBottomOf="@id/profile_image"
         app:layout_constraintEnd_toEndOf="@id/profile_image" />
 
@@ -149,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
-            android:text="Notifications"
+            android:text="About us"
             android:textColor="#56428F"
             android:textSize="16sp"
             android:textStyle="bold" />

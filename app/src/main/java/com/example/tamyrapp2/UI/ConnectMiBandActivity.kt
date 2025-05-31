@@ -24,9 +24,9 @@ class ConnectMiBandActivity : AppCompatActivity() {
 
             if (deviceAddress.isNotEmpty()) {
                 viewModel.connectToMiBand(deviceAddress)
-                Toast.makeText(this, "Подключение к устройству $deviceAddress...", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Connecting to the device $deviceAddress...", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Введите MAC-адрес устройства!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Enter the MAC address of the device!", Toast.LENGTH_SHORT).show()
             }
         }
     }

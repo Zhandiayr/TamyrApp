@@ -6,5 +6,5 @@ data class LifestyleInfoRequest(
     val smokes: Boolean,
     val drinksAlcohol: Boolean,
     val exercises: Boolean,
-    val fruitIntake: String // "Low", "Moderate", "High"
+    val fruitIntake: String
 )

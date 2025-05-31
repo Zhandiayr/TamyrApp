@@ -1,14 +1,11 @@
 package com.example.tamyrapp2.UI
-
 import android.os.Bundle
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
 import com.example.tamyrapp2.presentation.lifestyle.LifestyleInfoViewModel
-import androidx.appcompat.widget.SwitchCompat
 import android.content.Intent
-
 
 class LifestyleInfoActivity : AppCompatActivity() {
 

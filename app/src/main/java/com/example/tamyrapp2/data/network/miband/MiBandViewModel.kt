@@ -131,13 +131,13 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
         val userId = sharedPreferences.getLong("user_id", -1)
 
         if (userId == -1L) {
-            _error.value = "Ошибка: не найден userId"
+            _error.value = "Error: userId not found"
             return
         }
 
-        val fakeDevice = FakeMiBandDevice() // Создаем фейковое устройство
+        val fakeDevice = FakeMiBandDevice()
 
-        val distance = (fakeDevice.steps * 0.7).toInt() // Расчёт дистанции
+        val distance = (fakeDevice.steps * 0.7).toInt()
         val timestamp = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).format(Date())
 
         val request = MiBandDataRequest(
@@ -156,12 +156,12 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
                     if (response.isSuccessful) {
                         _success.value = true
                     } else {
-                        _error.value = "Ошибка отправки данных: ${response.code()}"
+                        _error.value = "Data transmission error: ${response.code()}"
                     }
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    _error.value = "Ошибка сети: ${t.message}"
+                    _error.value = "Network error: ${t.message}"
                 }
             })
     }

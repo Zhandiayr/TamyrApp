@@ -1,5 +1,4 @@
 package com.example.tamyrapp2.UI
-
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

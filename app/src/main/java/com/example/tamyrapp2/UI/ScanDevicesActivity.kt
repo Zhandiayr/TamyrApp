@@ -1,5 +1,4 @@
 package com.example.tamyrapp2.ui
-
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
@@ -86,7 +85,7 @@ class ScanDevicesActivity : AppCompatActivity() {
 
     private fun startDiscovery() {
         if (!hasBluetoothScanPermission()) {
-            Toast.makeText(this, "Нет разрешения на сканирование Bluetooth", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No permission to scan Bluetooth", Toast.LENGTH_SHORT).show()
             return
         }
         if (bluetoothAdapter?.isDiscovering == true) {
@@ -104,7 +103,7 @@ class ScanDevicesActivity : AppCompatActivity() {
             bluetoothAdapter?.cancelDiscovery()
         }
         viewModel.connectToMiBand(device.address)
-        Toast.makeText(this, "Подключение к ${device.name ?: "устройству"}...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Connecting to ${device.name ?: "device"}...", Toast.LENGTH_SHORT).show()
         finish()
     }
 

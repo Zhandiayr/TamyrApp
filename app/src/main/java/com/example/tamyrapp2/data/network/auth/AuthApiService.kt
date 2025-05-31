@@ -21,9 +21,9 @@ interface AuthApiService {
     @POST("registration")
     fun registerUser(@Body request: RegisterRequest): Call<Void>
 
-    @POST("login") // Авторизация
+    @POST("login")
     fun loginUser(@Body request: LoginRequest): Call<AuthResponse>
 
-    @POST("refresh_token") // Обновление токена
+    @POST("refresh_token")
     fun refreshToken(@Header("Authorization") token: String): Call<AuthResponse>
 }

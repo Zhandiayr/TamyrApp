@@ -130,7 +130,7 @@ class MiBandConnectionManager(private val context: Context) {
         private val SERVICE_HEART_RATE = UUID.fromString("0000180d-0000-1000-8000-00805f9b34fb")
         private val CHARACTERISTIC_HEART_RATE_MEASUREMENT = UUID.fromString("00002a37-0000-1000-8000-00805f9b34fb")
 
-        private val SERVICE_FITNESS = UUID.fromString("0000fee0-0000-1000-8000-00805f9b34fb") // Приватный сервис Mi Band
+        private val SERVICE_FITNESS = UUID.fromString("0000fee0-0000-1000-8000-00805f9b34fb")
         private val CHARACTERISTIC_STEPS = UUID.fromString("0000ff06-0000-1000-8000-00805f9b34fb")
 
         private val SERVICE_BATTERY = UUID.fromString("0000180f-0000-1000-8000-00805f9b34fb")
