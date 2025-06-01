@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F8F6F1">
+
+    <!-- Заголовок опроса -->
+    <TextView
+        android:id="@+id/tv_survey_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Survey Title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#432C82"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Контейнер для вопросов и вариантов ответов -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/question_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <!-- Кнопка отправки -->
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отправить"
+        android:backgroundTint="#56428F"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

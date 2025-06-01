@@ -79,6 +79,10 @@
             android:name=".UI.ProfileActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".UI.SurveyActivity"
+            android:exported="true" />
+
     </application>
 
 

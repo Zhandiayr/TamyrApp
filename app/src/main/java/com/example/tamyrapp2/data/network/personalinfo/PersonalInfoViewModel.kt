@@ -77,6 +77,9 @@ class PersonalInfoViewModel(application: Application) : AndroidViewModel(applica
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
+    private val _userAge = MutableLiveData<Int>()
+    val userAge: LiveData<Int> = _userAge
+
     private val _personalInfo = MutableLiveData<MainPersonalInfoRequest>()
     val personalInfo: LiveData<MainPersonalInfoRequest> = _personalInfo
 
@@ -144,6 +147,30 @@ class PersonalInfoViewModel(application: Application) : AndroidViewModel(applica
                 }
 
                 override fun onFailure(call: Call<MainPersonalInfoRequest>, t: Throwable) {
+                    _error.value = "Network error: ${t.message}"
+                }
+            })
+    }
+    fun fetchUserAge() {
+        val accessToken = sharedPreferences.getString("access_token", null)
+        val userId = sharedPreferences.getLong("user_id", -1)
+
+        if (accessToken.isNullOrEmpty() || userId == -1L) {
+            _error.value = "Authorization error: token or user ID missing"
+            return
+        }
+
+        RetrofitInstance.personalInfoApi.getAgeByUserId(userId, "Bearer $accessToken")
+            .enqueue(object : Callback<Int> {
+                override fun onResponse(call: Call<Int>, response: Response<Int>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        _userAge.value = response.body()
+                    } else {
+                        _error.value = "Failed to fetch age: ${response.code()}"
+                    }
+                }
+
+                override fun onFailure(call: Call<Int>, t: Throwable) {
                     _error.value = "Network error: ${t.message}"
                 }
             })

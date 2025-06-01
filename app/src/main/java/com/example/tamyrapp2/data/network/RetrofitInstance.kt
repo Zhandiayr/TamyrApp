@@ -21,10 +21,12 @@ import com.example.tamyrapp2.data.network.auth.AuthApiService
 import com.example.tamyrapp2.data.network.lifestyle.LifestyleApiService
 import com.example.tamyrapp2.data.network.miband.MiBandApiService
 import com.example.tamyrapp2.data.network.personalinfo.PersonalInfoApiService
+import com.example.tamyrapp2.data.network.survey.SurveyApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 object RetrofitInstance {
     private const val BASE_URL = "http://10.0.2.2:8080/"
@@ -62,6 +64,10 @@ object RetrofitInstance {
             .build()
             .create(LifestyleApiService::class.java)
     }
+    val surveyApi: SurveyApiService by lazy {
+        retrofit.create(SurveyApiService::class.java)
+    }
+
 
 
 }

@@ -59,11 +59,19 @@ class PersonalInfoActivity : AppCompatActivity() {
             age != null && age in 1..120 && weight != null && weight in 30..300 &&
             height != null && height in 50..250)
         {
+            // ✅ Сохраняем имя, фамилию и возраст в SharedPreferences
+            sharedPreferences.edit().apply {
+                putString("user_name", name)
+                putString("user_lastname", lastName)
+                putInt("user_age", age) // 👈 сохраняем возраст
+                apply()
+            }
+
             personalInfoViewModel.saveOrUpdatePersonalInfo(name, lastName, age, sex, weight, height)
-            saveUserName(name, lastName)
         } else {
             Toast.makeText(this, "Please fill all fields correctly", Toast.LENGTH_SHORT).show()
         }
+
     }
 
     private fun saveUserName(name: String, lastName: String) {

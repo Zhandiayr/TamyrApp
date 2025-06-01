@@ -18,5 +18,11 @@ interface PersonalInfoApiService {
         @Path("id") userId: Long,
         @Header("Authorization") token: String
     ): Call<MainPersonalInfoRequest>
+    @GET("api/personal-info/age/{userId}")
+    fun getAgeByUserId(
+        @Path("userId") userId: Long,
+        @Header("Authorization") token: String
+    ): Call<Int>
+
 
 }

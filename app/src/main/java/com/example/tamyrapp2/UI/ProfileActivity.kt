@@ -180,7 +180,10 @@ class ProfileActivity : AppCompatActivity() {
                 spinnerGender.setSelection(genderPosition)
                 editWeight.setText(it.weight?.toString() ?: "")
                 editHeight.setText(it.height?.toString() ?: "")
+
+                sharedPreferences.edit().putInt("user_age", it.age ?: -1).apply()
             }
         })
+
     }
 }
