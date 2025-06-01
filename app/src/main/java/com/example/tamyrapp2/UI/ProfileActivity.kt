@@ -1,4 +1,5 @@
 package com.example.tamyrapp2.UI
+
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -25,6 +26,12 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var cancelButton: Button
     private lateinit var profileImage: ImageView
     private lateinit var editAvatar: ImageView
+    private lateinit var arrowName: ImageView
+    private lateinit var arrowSurname: ImageView
+    private lateinit var arrowAge: ImageView
+    private lateinit var arrowGender: ImageView
+    private lateinit var arrowWeight: ImageView
+    private lateinit var arrowHeight: ImageView
 
     private val viewModel: PersonalInfoViewModel by viewModels {
         ViewModelFactory(application)
@@ -49,6 +56,13 @@ class ProfileActivity : AppCompatActivity() {
         profileImage = findViewById(R.id.profile_image)
         editAvatar = findViewById(R.id.edit_avatar)
 
+        arrowName = findViewById(R.id.arrow_name)
+        arrowSurname = findViewById(R.id.arrow_surname)
+        arrowAge = findViewById(R.id.arrow_age)
+        arrowGender = findViewById(R.id.arrow_gender)
+        arrowWeight = findViewById(R.id.arrow_weight)
+        arrowHeight = findViewById(R.id.arrow_height)
+
         val genderAdapter = ArrayAdapter.createFromResource(
             this,
             R.array.sex_options,
@@ -56,6 +70,15 @@ class ProfileActivity : AppCompatActivity() {
         )
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerGender.adapter = genderAdapter
+
+        setEditability(false)
+
+        arrowName.setOnClickListener { toggleEdit(editName) }
+        arrowSurname.setOnClickListener { toggleEdit(editSurname) }
+        arrowAge.setOnClickListener { toggleEdit(editAge) }
+        arrowGender.setOnClickListener { spinnerGender.isEnabled = !spinnerGender.isEnabled }
+        arrowWeight.setOnClickListener { toggleEdit(editWeight) }
+        arrowHeight.setOnClickListener { toggleEdit(editHeight) }
 
         loadUserInfo()
 
@@ -109,6 +132,29 @@ class ProfileActivity : AppCompatActivity() {
         tvUserEmail.text = email
     }
 
+    private fun toggleEdit(editText: EditText) {
+        val enabled = !editText.isEnabled
+        editText.isEnabled = enabled
+        editText.isFocusable = enabled
+        editText.isFocusableInTouchMode = enabled
+        editText.isClickable = enabled
+        editText.isCursorVisible = enabled
+        editText.isLongClickable = enabled
+
+        if (enabled) {
+            editText.requestFocus()
+            editText.setSelection(editText.text.length)  // Курсор в конец текста
+        }
+    }
+
+    private fun setEditability(enabled: Boolean) {
+        editName.isEnabled = enabled
+        editSurname.isEnabled = enabled
+        editAge.isEnabled = enabled
+        spinnerGender.isEnabled = enabled
+        editWeight.isEnabled = enabled
+        editHeight.isEnabled = enabled
+    }
 
     private fun observeViewModel() {
         viewModel.success.observe(this, Observer { success ->
