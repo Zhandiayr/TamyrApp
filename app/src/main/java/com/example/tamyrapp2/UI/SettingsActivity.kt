@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -59,6 +60,14 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(Intent(this, LifestyleInfoActivity::class.java))
         }
 
+        val btnLogout = findViewById<Button>(R.id.button_logout)
+        btnLogout.setOnClickListener {
+            logOut()
+        }
+
+
+
+
 
 
 
@@ -89,4 +98,24 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun logOut() {
+        sharedPreferences.edit().apply {
+            remove("access_token")
+            remove("refresh_token")
+            remove("user_id")
+            remove("user_username")
+            remove("user_email")
+            remove("user_name")
+            remove("user_lastname")
+            remove("user_firstname")
+            apply()
+        }
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
 }

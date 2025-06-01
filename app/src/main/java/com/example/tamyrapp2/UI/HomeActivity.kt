@@ -22,11 +22,6 @@ class HomeActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
 
-        val btnLogout = findViewById<Button>(R.id.button_logout)
-        btnLogout.setOnClickListener {
-            logOut()
-        }
-
         val btnSendFakeData = findViewById<Button>(R.id.button_send_fake_data)
         btnSendFakeData.setOnClickListener {
             miBandViewModel.sendFakeDeviceData()
@@ -61,23 +56,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun logOut() {
-        sharedPreferences.edit().apply {
-            remove("access_token")
-            remove("refresh_token")
-            remove("user_id")
-            remove("user_username")
-            remove("user_email")
-            remove("user_name")
-            remove("user_lastname")
-            apply()
-        }
 
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        finish()
-    }
 
 
 }
