@@ -22,10 +22,7 @@ class HomeActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
 
-        val btnSendFakeData = findViewById<Button>(R.id.button_send_fake_data)
-        btnSendFakeData.setOnClickListener {
-            miBandViewModel.sendFakeDeviceData()
-        }
+
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_home
