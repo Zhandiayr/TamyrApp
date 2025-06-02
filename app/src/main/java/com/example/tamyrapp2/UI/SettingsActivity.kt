@@ -1,33 +1,36 @@
 package com.example.tamyrapp2.UI
+
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.tamyrapp2.R
+import com.example.tamyrapp2.presentation.utils.SettingsViewModel
+import com.example.tamyrapp2.presentation.utils.ViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var profileImage: ImageView
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var userNameTextView: TextView
     private lateinit var userEmailTextView: TextView
+
+    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
         profileImage = findViewById(R.id.profile_image)
-        userNameTextView = findViewById(R.id.tv_user_name)
         userEmailTextView = findViewById(R.id.tv_user_email)
 
         pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -86,24 +89,31 @@ class SettingsActivity : AppCompatActivity() {
                 else -> false
             }
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        // При возвращении на экран обновляем имя и email из SharedPreferences
-        updateUserInfo()
-    }
+        // Инициализация ViewModel с фабрикой
+        val factory = ViewModelFactory(application)
+        viewModel = ViewModelProvider(this, factory).get(SettingsViewModel::class.java)
 
-    private fun updateUserInfo() {
-        val firstName = sharedPreferences.getString("user_firstname", "Имя не указано")
-        val email = sharedPreferences.getString("user_email", "Email не указан")
-        userNameTextView.text = firstName
-        userEmailTextView.text = email
+        // Подписка на LiveData email
+        viewModel.email.observe(this) { email ->
+            userEmailTextView.text = email
+        }
+
+        // Подписка на ошибки
+        viewModel.error.observe(this) { errorMsg ->
+            errorMsg?.let {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+        }
+
+        // Загружаем email с backend
+        viewModel.loadUserEmail()
     }
 
     private fun logOut() {
+        val sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
         sharedPreferences.edit().apply {
-            clear() // Очистить всё, чтобы не осталось старых данных
+            clear() // Очистить всё
             apply()
         }
         val intent = Intent(this, LoginActivity::class.java)

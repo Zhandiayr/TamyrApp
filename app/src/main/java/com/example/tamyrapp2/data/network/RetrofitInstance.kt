@@ -22,6 +22,8 @@ import com.example.tamyrapp2.data.network.lifestyle.LifestyleApiService
 import com.example.tamyrapp2.data.network.miband.MiBandApiService
 import com.example.tamyrapp2.data.network.personalinfo.PersonalInfoApiService
 import com.example.tamyrapp2.data.network.survey.SurveyApiService
+import com.example.tamyrapp2.data.network.user.UserApiService
+
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -67,6 +69,13 @@ object RetrofitInstance {
     val surveyApi: SurveyApiService by lazy {
         retrofit.create(SurveyApiService::class.java)
     }
+
+    val userApi: UserApiService by lazy {
+        retrofit.create(UserApiService::class.java)
+    }
+
+
+
 
 
 

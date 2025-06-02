@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="User profile image" />
 
-    <!-- Имя пользователя -->
+    <!-- Имя пользователя (скрытое) -->
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
@@ -47,6 +47,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/profile_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -58,7 +59,7 @@
         android:layout_height="wrap_content"
         android:text="user@email.com"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+        app:layout_constraintTop_toBottomOf="@id/profile_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -267,13 +268,6 @@
         app:layout_constraintTop_toBottomOf="@id/btn_life_data"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
-
-
-
-
-
 
     <!-- Нижняя навигация -->
     <LinearLayout
