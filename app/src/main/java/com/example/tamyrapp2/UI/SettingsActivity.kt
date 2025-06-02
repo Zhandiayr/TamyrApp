@@ -13,28 +13,22 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var profileImage: ImageView
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var userNameTextView: TextView
+    private lateinit var userEmailTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        profileImage = findViewById(R.id.profile_image)
         sharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
-
-        val userNameTextView = findViewById<TextView>(R.id.tv_user_name)
-        val userEmailTextView = findViewById<TextView>(R.id.tv_user_email)
-
-        val firstName = sharedPreferences.getString("user_firstname", "Имя не указано")
-        val email = sharedPreferences.getString("user_email", "Email не указан")
-
-        userNameTextView.text = firstName
-        userEmailTextView.text = email
+        profileImage = findViewById(R.id.profile_image)
+        userNameTextView = findViewById(R.id.tv_user_name)
+        userEmailTextView = findViewById(R.id.tv_user_email)
 
         pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -49,44 +43,28 @@ class SettingsActivity : AppCompatActivity() {
             pickImageLauncher.launch(intent)
         }
 
-        val profileButton = findViewById<LinearLayout>(R.id.btn_profile)
-        profileButton.setOnClickListener {
+        findViewById<LinearLayout>(R.id.btn_profile).setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
-        val btnAboutUs = findViewById<LinearLayout>(R.id.btn_notifications) // если это About Us
-        btnAboutUs.setOnClickListener {
-            val intent = Intent(this, AboutUsActivity::class.java)
-            startActivity(intent)
+        findViewById<LinearLayout>(R.id.btn_notifications).setOnClickListener {
+            startActivity(Intent(this, AboutUsActivity::class.java))
         }
 
-        val lifeDataButton = findViewById<LinearLayout>(R.id.btn_life_data)
-        lifeDataButton.setOnClickListener {
+        findViewById<LinearLayout>(R.id.btn_life_data).setOnClickListener {
             startActivity(Intent(this, LifestyleInfoActivity::class.java))
         }
 
-        val securityPolicyButton = findViewById<LinearLayout>(R.id.btn_privacy)
-        securityPolicyButton.setOnClickListener {
+        findViewById<LinearLayout>(R.id.btn_privacy).setOnClickListener {
             startActivity(Intent(this, SecurityPolicyActivity::class.java))
         }
 
-
-        val btnLogout = findViewById<Button>(R.id.button_logout)
-        btnLogout.setOnClickListener {
+        findViewById<Button>(R.id.button_logout).setOnClickListener {
             logOut()
         }
 
-
-
-
-
-
-
-
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-
         bottomNavigationView.selectedItemId = R.id.nav_settings
-
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -110,23 +88,27 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        // При возвращении на экран обновляем имя и email из SharedPreferences
+        updateUserInfo()
+    }
+
+    private fun updateUserInfo() {
+        val firstName = sharedPreferences.getString("user_firstname", "Имя не указано")
+        val email = sharedPreferences.getString("user_email", "Email не указан")
+        userNameTextView.text = firstName
+        userEmailTextView.text = email
+    }
+
     private fun logOut() {
         sharedPreferences.edit().apply {
-            remove("access_token")
-            remove("refresh_token")
-            remove("user_id")
-            remove("user_username")
-            remove("user_email")
-            remove("user_name")
-            remove("user_lastname")
-            remove("user_firstname")
+            clear() // Очистить всё, чтобы не осталось старых данных
             apply()
         }
-
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
     }
-
 }
