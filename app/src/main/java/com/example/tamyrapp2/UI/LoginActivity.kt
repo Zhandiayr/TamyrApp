@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tamyrapp2.R
+import com.example.tamyrapp2.UI.ond.OnboardingActivity
 import com.example.tamyrapp2.data.network.RetrofitInstance
 import com.example.tamyrapp2.data.network.auth.AuthViewModel
 import com.example.tamyrapp2.data.network.personalinfo.MainPersonalInfoRequest
@@ -82,41 +83,33 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkIfPersonalInfoExists(userId: Long, token: String) {
-        RetrofitInstance.personalInfoApi.getPersonalInfoById(userId, "Bearer $token")
-            .enqueue(object : Callback<MainPersonalInfoRequest> {
-                override fun onResponse(
-                    call: Call<MainPersonalInfoRequest>,
-                    response: Response<MainPersonalInfoRequest>
-                ) {
-                    val intent = if (response.isSuccessful) {
-                        val info = response.body()
-
-                        val isFilled = info != null &&
-                                !info.name.isNullOrBlank() &&
-                                !info.surname.isNullOrBlank() &&
-                                !info.sex.isNullOrBlank() &&
-                                (info.age ?: 0) > 0 &&
-                                (info.weight ?: 0) > 0 &&
-                                (info.height ?: 0) > 0
-
-                        if (isFilled) {
+        RetrofitInstance.personalInfoApi.existsPersonalInfo(userId, "Bearer $token")
+            .enqueue(object : Callback<Boolean> {
+                override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val exists = response.body()!!
+                        val intent = if (exists) {
                             Intent(this@LoginActivity, HomeActivity::class.java)
                         } else {
-                            Intent(this@LoginActivity, PersonalInfoActivity::class.java)
+                            Intent(this@LoginActivity, OnboardingActivity::class.java)
                         }
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                        finish()
                     } else {
-                        Intent(this@LoginActivity, PersonalInfoActivity::class.java)
+                        showError("Failed to check personal info")
                     }
-
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
                 }
 
-                override fun onFailure(call: Call<MainPersonalInfoRequest>, t: Throwable) {
-                    Toast.makeText(this@LoginActivity, "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
+                override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                    showError("Network error: ${t.message}")
                 }
             })
     }
+
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
 }
 

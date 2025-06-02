@@ -15,6 +15,7 @@ import androidx.work.*
 import com.example.tamyrapp2.R
 import com.example.tamyrapp2.data.network.personalinfo.PersonalInfoViewModel
 import com.example.tamyrapp2.data.network.survey.SurveyDataRequest
+import com.example.tamyrapp2.data.network.survey.SurveyListAdapter
 import com.example.tamyrapp2.data.network.survey.SurveyReminderWorker
 import com.example.tamyrapp2.data.network.survey.SurveyViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -71,12 +72,15 @@ class NotificationsActivity : AppCompatActivity() {
 
             allUnanswered = filtered
 
-            val adapter = ArrayAdapter(
-                this,
-                android.R.layout.simple_list_item_1,
-                filtered.map { it.surveyDescription ?: "Без описания" }
-            )
+            val adapter = SurveyListAdapter(this, filtered)
             listView.adapter = adapter
+
+            listView.setOnItemClickListener { _, _, position, _ ->
+                val intent = Intent(this, SurveyActivity::class.java)
+                intent.putExtra("surveyId", filtered[position].surveyId)
+                startActivity(intent)
+            }
+
 
             listView.setOnItemClickListener { _, _, position, _ ->
                 val intent = Intent(this, SurveyActivity::class.java)

@@ -8,7 +8,7 @@ import com.example.tamyrapp2.R
 class OnboardingActivity : AppCompatActivity() {
 
     lateinit var viewPager: ViewPager2
-    private lateinit var adapter: OnboardingAdapter
+    lateinit var adapter: OnboardingAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,3 +19,4 @@ class OnboardingActivity : AppCompatActivity() {
         viewPager.adapter = adapter
     }
 }
+

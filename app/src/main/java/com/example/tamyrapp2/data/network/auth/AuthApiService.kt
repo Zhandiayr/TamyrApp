@@ -1,15 +1,3 @@
-/*import com.example.tamyrapp2.retrofit.auth.AuthResponse
-import com.example.tamyrapp2.retrofit.auth.RegisterRequest
-import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
-
-interface AuthApiService {
-    @POST("login") // Эндпоинт для входа
-    fun registerUser(@Body request: RegisterRequest): Call<AuthResponse>
-}
- */
-
 package com.example.tamyrapp2.data.network.auth
 
 import retrofit2.Call

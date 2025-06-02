@@ -1,5 +1,6 @@
 package com.example.tamyrapp2.UI.ond
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.tamyrapp2.R
+import com.example.tamyrapp2.UI.PersonalInfoActivity
+import com.example.tamyrapp2.UI.ond.OnboardingActivity
 
 class OnboardingFragment : Fragment() {
 
@@ -36,6 +39,7 @@ class OnboardingFragment : Fragment() {
         val description = view.findViewById<TextView>(R.id.descriptionOnboarding)
         val image = view.findViewById<ImageView>(R.id.imageOnboarding)
         val indicatorContainer = view.findViewById<LinearLayout>(R.id.indicatorContainer)
+        val skipTour = view.findViewById<TextView>(R.id.skipTour)
 
         arguments?.let {
             title.text = it.getString(ARG_TITLE)
@@ -43,19 +47,28 @@ class OnboardingFragment : Fragment() {
             image.setImageResource(it.getInt(ARG_IMAGE_RES))
         }
 
-        // Получаем ViewPager2 из активности, чтобы слушать смену страницы
         val onboardingActivity = activity as? OnboardingActivity
-        onboardingActivity?.let { act ->
-            act.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    updateIndicators(indicatorContainer, position)
-                }
-            })
-        }
+            onboardingActivity?.let { act ->
+            val adapter = act.adapter
+
+        act.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                updateIndicators(indicatorContainer, position)
+
+                skipTour.visibility = if (position == (adapter?.itemCount ?: 0) - 1) View.VISIBLE else View.GONE
+            }
+        })
     }
 
-    // Метод для обновления индикаторов (точек)
+    skipTour.setOnClickListener {
+        val intent = Intent(requireContext(), PersonalInfoActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        activity?.finish()
+    }
+}
+
     private fun updateIndicators(container: LinearLayout, selectedPosition: Int) {
         for (i in 0 until container.childCount) {
             val view = container.getChildAt(i)
@@ -72,7 +85,6 @@ class OnboardingFragment : Fragment() {
         }
     }
 
-    // Вспомогательная функция для перевода dp в пиксели
     private fun dpToPx(dp: Int): Int {
         val density = resources.displayMetrics.density
         return (dp * density).toInt()

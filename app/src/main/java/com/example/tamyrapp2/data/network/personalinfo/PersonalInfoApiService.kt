@@ -23,6 +23,9 @@ interface PersonalInfoApiService {
         @Path("userId") userId: Long,
         @Header("Authorization") token: String
     ): Call<Int>
-
-
+    @GET("api/personal-info/exists/{userId}")
+    fun existsPersonalInfo(
+        @Path("userId") userId: Long,
+        @Header("Authorization") token: String
+    ): Call<Boolean>
 }
