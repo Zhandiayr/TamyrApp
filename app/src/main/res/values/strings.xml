@@ -14,5 +14,76 @@
     <string name="hint_weight">Вес</string>
     <string name="hint_height">Рост</string>
     <string name="button_save">Сохранить</string>
-</resources>
 
+    <string name="onboarding_title">Welcome to the App</string>
+    <string name="onboarding_description">Welcome to “TAMYR”! Our app will help you monitor your heart health using data from wearable devices and surveys. We offer a smart and adaptive approach to health, predicting risks in time and improving your quality of life.</string>
+    <string name="onboarding_image_desc">Onboarding illustration</string>
+    <string name="skip_tour">Skip Tour</string>
+
+    <string name="privacy_policy_text">
+    <![CDATA[
+This Privacy Policy describes how TAMYR APP (“we”, “our”, or “us”) collects, uses, stores, and protects the personal and health-related data of users who install and use our mobile application. We are committed to ensuring that your privacy is protected and that your data is handled responsibly in accordance with applicable data protection laws.\n
+1. Information We Collect\n
+We may collect and process the following types of personal and sensitive information:\n
+1.1 Personal Identification Information\n
+Full name\n
+Email address\n
+Date of birth\n
+Gender\n
+1.2 Health and Lifestyle Information\n
+Data collected from wearable devices (e.g. Mi Band), including:\n
+Heart rate\n
+Step count\n
+Calories burned\n
+Sleep duration\n
+Responses to health-related questionnaires\n
+Lifestyle factors such as smoking, alcohol consumption, stress level\n
+1.3 Technical Data\n
+Device information (e.g., device model, operating system)\n
+IP address and time zone\n
+Usage data within the application\n
+2. How We Use Your Data\n
+We collect and use your data solely for the following purposes:\n
+To provide personalized health insights and risk predictions based on AI algorithms\n
+To enhance your user experience within the application\n
+To improve the performance and accuracy of our predictive models\n
+To fulfill legal and regulatory obligations related to health data management\n
+To provide technical support and resolve user-reported issues\n
+3. Legal Basis for Processing\n
+We process your personal data based on:\n
+Consent – by agreeing to this policy, you provide us with permission to process your data;\n
+Legitimate interest – improving and maintaining our services;\n
+Compliance with legal obligations – when required by applicable laws or regulations.\n
+4. Data Retention and Storage\n
+Your data is securely stored on encrypted servers and is retained only for as long as necessary to fulfill the purposes outlined in this policy.\n
+You may request the deletion of your data at any time by contacting us.\n
+5. Data Sharing and Disclosure\n
+We do not sell, lease, or disclose your personal information to third parties except:\n
+When required by law or court order;\n
+When data is anonymized and used for academic or scientific research;\n
+When collaborating with medical institutions under strict confidentiality agreements (B2B partnerships).\n
+6. Your Rights as a Data Subject\n
+In accordance with data protection laws, you have the following rights:\n
+Right to access your personal data\n
+Right to correct inaccurate or outdated information\n
+Right to request deletion (“right to be forgotten”)\n
+Right to withdraw consent at any time\n
+Right to data portability\n
+To exercise any of these rights, please contact us at support@tamyrapp.kz\n
+7. Data Security\n
+We implement industry-standard security practices, including:\n
+Data encryption (both in transit and at rest)\n
+JWT-based authentication and token management\n
+Secure storage of access and refresh tokens\n
+Periodic audits and vulnerability assessments\n
+We continuously monitor and update our systems to protect against unauthorized access, misuse, loss, or disclosure.\n
+8. Children’s Privacy\n
+TAMYR APP is not intended for use by individuals under the age of 16. We do not knowingly collect data from minors without parental consent.\n
+9. Updates to This Policy\n
+We reserve the right to amend this Privacy Policy at any time. All changes will be posted within the application and/or website, and the date of the latest revision will be indicated above. Your continued use of the application constitutes acceptance of the updated policy.\n
+10. Contact Information\n
+If you have any questions or concerns about this Privacy Policy or your data, please contact us:\n
+Email: support_tamyrapp@gmail.com\n
+]]>
+</string>
+</resources>

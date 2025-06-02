@@ -141,7 +141,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_notifications1"
+            android:src="@drawable/ic_aboutus"
             android:contentDescription="Notifications icon" />
 
         <TextView
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
-            android:text="Privacy  Security"
+            android:text="Privacy &amp; Policy"
             android:textColor="#56428F"
             android:textSize="16sp"
             android:textStyle="bold" />

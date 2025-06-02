@@ -58,7 +58,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun saveUserInfo(username: String, email: String) {
         sharedPreferences.edit().apply {
-            putString("user_username", username)
+            putString("user_firstname", username)
             putString("user_email", email)
             apply()
         }

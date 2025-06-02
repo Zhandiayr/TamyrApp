@@ -16,4 +16,6 @@
     <color name="textColor">#4B237D</color> <!-- Фиолетовый (для текста) -->
     <color name="darkPurple">#4B237D</color> <!-- Тёмно-фиолетовый -->
     <color name="buttonText">#FFFFFF</color> <!-- Белый текст для кнопки -->
+    <color name="light_blue">#D9F1FF</color>
+    <color name="purple_primary">#432C81</color>
 </resources>

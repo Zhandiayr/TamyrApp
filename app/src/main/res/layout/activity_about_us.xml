@@ -1,0 +1,269 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCFCF4"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Заголовок -->
+        <TextView
+            android:id="@+id/titleAboutUs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="About us"
+            android:textColor="#432C81"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:layout_marginTop="24dp"/>
+
+        <!-- Картинка с сердцем -->
+        <ImageView
+            android:id="@+id/imageHeartDna"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleAboutUs" />
+
+        <!-- Абзац с красной выделенной частью -->
+        <TextView
+            android:id="@+id/textTamyrAppDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="TAMYR APP is more than just a health app! It’s a smart assistant that helps you take control of your heart’s future."
+            android:lineSpacingExtra="4dp"
+            app:layout_constraintTop_toBottomOf="@id/imageHeartDna"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Карта + текст -->
+        <ImageView
+            android:id="@+id/imageKazakhstanMap"
+            android:layout_width="141dp"
+            android:layout_height="146dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Map of Kazakhstan"
+            android:src="@drawable/kazakhstan_map"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textTamyrAppDescription" />
+
+        <TextView
+            android:id="@+id/textKazakhstanCardio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="In Kazakhstan, thousands of people suffer from cardiovascular diseases every year — many of which could have been prevented. We asked ourselves a simple question:"
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            app:layout_constraintTop_toTopOf="@id/imageKazakhstanMap"
+            app:layout_constraintStart_toEndOf="@id/imageKazakhstanMap"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"/>
+
+        <!-- Цитата в рамке -->
+
+        <!-- Остальной текст -->
+        <TextView
+            android:id="@+id/textQuote"
+            android:layout_width="380dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/border_rounded_red"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textColor="#832A25"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageKazakhstanMap" />
+
+        <TextView
+            android:id="@+id/textTamyrBorn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="That’s how TAMYR was born — a digital tool that connects data from your wearable device with the power of artificial intelligence."
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:lineSpacingExtra="4dp"
+            app:layout_constraintTop_toBottomOf="@id/textQuote"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Круговая диаграмма -->
+        <ImageView
+            android:id="@+id/imageCircleChart"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/circle_chart"
+            android:contentDescription="Circle Chart"
+            app:layout_constraintTop_toBottomOf="@id/textTamyrBorn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Текст рядом с диаграммой -->
+        <TextView
+            android:id="@+id/textSystemDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Our system doesn't just track — it analyzes, predicts, and supports you in making healthier choices every day."
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            app:layout_constraintTop_toTopOf="@id/imageCircleChart"
+            app:layout_constraintStart_toEndOf="@id/imageCircleChart"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="12dp"/>
+
+        <!-- Заголовок Why we built -->
+        <TextView
+            android:id="@+id/titleWhyBuilt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Why we built TAMYR?"
+            android:textColor="#432C81"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/imageCircleChart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"/>
+
+        <!-- Список пунктов -->
+        <TextView
+            android:id="@+id/listItem1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="• Because health should be proactive, not reactive."
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/titleWhyBuilt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/listItem2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="• Because simple daily habits matter."
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/listItem1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/listItem3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="• Because AI can be more than just smart — it can be life-saving."
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/listItem2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"/>
+
+        <!-- Текст внизу -->
+        <TextView
+            android:id="@+id/textFooter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TAMYR APP started as a student innovation project at International Information Technology University (IITU) in 2025. Today, we're proud to be part of a movement for accessible and predictive digital health — in Central Asia and beyond."
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            android:lineSpacingExtra="3dp"
+            app:layout_constraintTop_toBottomOf="@id/listItem3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Контакты с иконками -->
+
+        <ImageView
+            android:id="@+id/iconLocation"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="Location icon"
+            app:layout_constraintTop_toBottomOf="@id/textFooter"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/textLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="📍 Headquarters: Almaty, Kazakhstan"
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="@id/iconLocation"
+            app:layout_constraintStart_toEndOf="@id/iconLocation"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"/>
+
+        <ImageView
+            android:id="@+id/iconMail"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="Mail icon"
+            app:layout_constraintTop_toBottomOf="@id/iconLocation"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/textMail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="📧 Contact: support_tamyrapp@gmail.com"
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="@id/iconMail"
+            app:layout_constraintStart_toEndOf="@id/iconMail"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"/>
+
+        <ImageView
+            android:id="@+id/iconRocket"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:contentDescription="Rocket icon"
+            app:layout_constraintTop_toBottomOf="@id/iconMail"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/textRocket"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="🚀 Version 1.0 launched: 2025"
+            android:textColor="#432C81"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="@id/iconRocket"
+            app:layout_constraintStart_toEndOf="@id/iconRocket"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

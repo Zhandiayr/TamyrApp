@@ -83,6 +83,17 @@
             android:name=".UI.SurveyActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".UI.ond.OnboardingActivity"
+            android:exported="true" />
+
+        <activity android:name=".UI.AboutUsActivity"
+            android:exported="true"/>
+
+        <activity android:name=".UI.SecurityPolicyActivity"
+            android:exported="true"/>
+
+
     </application>
 
 

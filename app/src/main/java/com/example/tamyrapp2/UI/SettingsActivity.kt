@@ -54,11 +54,22 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
+        val btnAboutUs = findViewById<LinearLayout>(R.id.btn_notifications) // если это About Us
+        btnAboutUs.setOnClickListener {
+            val intent = Intent(this, AboutUsActivity::class.java)
+            startActivity(intent)
+        }
 
         val lifeDataButton = findViewById<LinearLayout>(R.id.btn_life_data)
         lifeDataButton.setOnClickListener {
             startActivity(Intent(this, LifestyleInfoActivity::class.java))
         }
+
+        val securityPolicyButton = findViewById<LinearLayout>(R.id.btn_privacy)
+        securityPolicyButton.setOnClickListener {
+            startActivity(Intent(this, SecurityPolicyActivity::class.java))
+        }
+
 
         val btnLogout = findViewById<Button>(R.id.button_logout)
         btnLogout.setOnClickListener {
