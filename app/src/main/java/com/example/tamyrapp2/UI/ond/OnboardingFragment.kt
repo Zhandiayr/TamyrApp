@@ -48,7 +48,7 @@ class OnboardingFragment : Fragment() {
         }
 
         val onboardingActivity = activity as? OnboardingActivity
-            onboardingActivity?.let { act ->
+        onboardingActivity?.let { act ->
             val adapter = act.adapter
 
         act.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

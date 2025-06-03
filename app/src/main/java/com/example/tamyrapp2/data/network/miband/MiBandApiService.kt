@@ -21,4 +21,5 @@ interface MiBandApiService {
         @Header("Authorization") token: String,
         @Path("userId") userId: Long
     ): Call<List<MiBandDataResponse>>
+
 }

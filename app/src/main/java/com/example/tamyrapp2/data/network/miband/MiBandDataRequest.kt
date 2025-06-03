@@ -2,7 +2,7 @@ package com.example.tamyrapp2.data.network.miband
 
 data class MiBandDataRequest(
     val userId: Long,
-    val heartRate: Int,
+    val heartRateList: List<Int>,  // массив пульса
     val steps: Int,
     val caloriesBurned: Int,
     val distance: Int,
