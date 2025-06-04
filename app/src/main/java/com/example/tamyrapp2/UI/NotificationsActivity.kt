@@ -5,12 +5,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.work.*
 import com.example.tamyrapp2.R
 import com.example.tamyrapp2.data.network.personalinfo.PersonalInfoViewModel
@@ -29,7 +27,6 @@ class NotificationsActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var listView: ListView
-    private lateinit var allUnanswered: List<SurveyDataRequest>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,10 +56,6 @@ class NotificationsActivity : AppCompatActivity() {
         surveyViewModel.fetchUnansweredSurveys(userId, token)
         surveyViewModel.unansweredSurveys.observe(this) { surveys ->
 
-            surveys.forEach {
-                Log.d("SURVEY_DEBUG", "ID=${it.surveyId}, TYPE=${it.surveyType}, DAILY=${it.isDaily}, DESC=${it.surveyDescription}")
-            }
-
             val filtered = surveys.filter {
                 it.isDaily || (
                         (userAge < 40 && it.surveyType.equals("youth", ignoreCase = true)) ||
@@ -70,26 +63,34 @@ class NotificationsActivity : AppCompatActivity() {
                         )
             }
 
-            allUnanswered = filtered
+            if (filtered.isEmpty()) {
+                val fakeSurvey = SurveyDataRequest(
+                    surveyId = -1L,
+                    surveyDescription = getRandomRiskScore(),
+                    questionsAnswersVariants = "{}",
+                    isDaily = false,
+                    surveyType = "risk"
+                )
+                val adapter = SurveyListAdapter(this, listOf(fakeSurvey))
+                listView.adapter = adapter
+            } else {
+                val adapter = SurveyListAdapter(this, filtered)
+                listView.adapter = adapter
 
-            val adapter = SurveyListAdapter(this, filtered)
-            listView.adapter = adapter
+                listView.setOnItemClickListener { _, _, position, _ ->
+                    val intent = Intent(this, SurveyActivity::class.java)
+                    intent.putExtra("surveyId", filtered[position].surveyId)
+                    startActivity(intent)
+                }
 
-            listView.setOnItemClickListener { _, _, position, _ ->
-                val intent = Intent(this, SurveyActivity::class.java)
-                intent.putExtra("surveyId", filtered[position].surveyId)
-                startActivity(intent)
+                scheduleDailySurveyReminderIfNeeded(filtered)
             }
-
-
-            listView.setOnItemClickListener { _, _, position, _ ->
-                val intent = Intent(this, SurveyActivity::class.java)
-                intent.putExtra("surveyId", filtered[position].surveyId)
-                startActivity(intent)
-            }
-
-            scheduleDailySurveyReminderIfNeeded(filtered)
         }
+    }
+
+    private fun getRandomRiskScore(): String {
+        val riskLevels = listOf("Низкий риск", "Средний риск", "Высокий риск")
+        return riskLevels.random()
     }
 
     private fun scheduleDailySurveyReminderIfNeeded(surveys: List<SurveyDataRequest>) {
