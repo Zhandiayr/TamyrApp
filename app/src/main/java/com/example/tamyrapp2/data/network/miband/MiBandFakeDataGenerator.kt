@@ -8,13 +8,6 @@ import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class FakeMiBandData(
-    val heartRate: Int,
-    val stepsKm: Double,
-    val sleepHours: Int,
-    val timestamp: String
-)
-
 class MiBandFakeDataGenerator(private val context: Context) {
 
     private val prefs: SharedPreferences = context.getSharedPreferences("fake_miband_data", Context.MODE_PRIVATE)
@@ -49,15 +42,12 @@ class MiBandFakeDataGenerator(private val context: Context) {
     private fun generateData() {
         val calendar = Calendar.getInstance()
 
-        // Меняем пульс каждую минуту на случайное значение между -3, +2 или +5 в диапазоне 70..95
         val change = listOf(-3, 2, 5).random()
         currentHeartRate = (currentHeartRate + change).coerceIn(70, 95)
 
-        // Шаги растут каждую минуту, добавляем от 0.01 до 0.05 км, чтобы было реалистично
         val stepsIncrement = (1..5).random() / 100.0
         currentStepsKm += stepsIncrement
 
-        // Сон меняется раз в день между 6 и 9 часами
         val todayDay = calendar.get(Calendar.DAY_OF_YEAR)
         if (todayDay != lastSleepChangeDay) {
             currentSleepHours = (6..9).random()

@@ -7,51 +7,40 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.ConcurrentLinkedQueue
-
 object MiBandDataBufferManager {
+    private val buffer = mutableListOf<MiBandDataRequest>()
 
-    private val buffer = ConcurrentLinkedQueue<MiBandDataRequest>()
-    private var sendJob: Job? = null
-    private var accessToken: String? = null
-
+    // Добавляем данные в буфер
     fun addData(data: MiBandDataRequest) {
         buffer.add(data)
     }
 
-    fun startPeriodicSending(token: String) {
-        accessToken = token
-        if (sendJob == null || sendJob?.isCancelled == true) {
-            sendJob = CoroutineScope(Dispatchers.IO).launch {
-                while (isActive) {
-                    delay(600_000L) // 10 минут
-                    sendBufferedData()
-                }
+    // Метод для запуска периодической отправки данных
+    fun startPeriodicSending(accessToken: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            while (isActive) {
+                delay(600_000L)  // Отправка данных каждые 10 минут
+                sendBufferedData(accessToken)
             }
         }
     }
 
-    private suspend fun sendBufferedData() {
-        val token = accessToken ?: return
-        while (buffer.isNotEmpty()) {
-            val data = buffer.poll() ?: continue
-            val call = RetrofitInstance.miBandApi.sendMiBandData("Bearer $token", data)
-            try {
-                val response = call.execute()
-                if (!response.isSuccessful) {
-                    // Если отправка неуспешна, вернуть данные обратно в буфер
-                    buffer.add(data)
-                    break // остановить попытки, ждем следующего цикла
-                }
-            } catch (e: Exception) {
-                // При ошибке сети вернуть данные в буфер
-                buffer.add(data)
-                break
-            }
-        }
-    }
+    private suspend fun sendBufferedData(accessToken: String) {
+        val dataToSend = buffer.toList()
+        buffer.clear()
 
-    fun stopSending() {
-        sendJob?.cancel()
-        sendJob = null
+        // Отправка данных в бэкэнд
+        dataToSend.forEach { request ->
+            RetrofitInstance.miBandApi.sendMiBandData("Bearer $accessToken", request)
+                .enqueue(object : retrofit2.Callback<Void> {
+                    override fun onResponse(call: retrofit2.Call<Void>, response: retrofit2.Response<Void>) {
+                        // Обработка успешной отправки
+                    }
+
+                    override fun onFailure(call: retrofit2.Call<Void>, t: Throwable) {
+                        // Обработка ошибки
+                    }
+                })
+        }
     }
 }

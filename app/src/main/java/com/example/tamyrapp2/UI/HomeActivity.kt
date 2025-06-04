@@ -17,7 +17,6 @@ import com.google.gson.Gson
 import kotlinx.coroutines.*
 import com.example.tamyrapp2.data.network.RetrofitInstance
 
-
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
@@ -62,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
         // Запускаем корутину для отправки накопленных данных каждые 10 минут
         sendJob = CoroutineScope(Dispatchers.IO).launch {
             while (isActive) {
-                delay(60_000L) // 10 минут
+                delay(600_000L) // 10 минут
                 sendAccumulatedData()
             }
         }
@@ -168,10 +167,10 @@ class HomeActivity : AppCompatActivity() {
             RetrofitInstance.miBandApi.sendMiBandData("Bearer $accessToken", request)
                 .enqueue(object : retrofit2.Callback<Void> {
                     override fun onResponse(call: retrofit2.Call<Void>, response: retrofit2.Response<Void>) {
-                        // Опционально обработать ответ
+                        // Обработка ответа (не обязательно)
                     }
                     override fun onFailure(call: retrofit2.Call<Void>, t: Throwable) {
-                        // Опционально обработать ошибку
+                        // Обработка ошибки (не обязательно)
                     }
                 })
         }

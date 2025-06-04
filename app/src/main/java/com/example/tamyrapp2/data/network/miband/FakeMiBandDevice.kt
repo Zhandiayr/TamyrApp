@@ -1,5 +1,4 @@
-
-package com.example.tamyrapp2.fake
+package com.example.tamyrapp2.data.network.miband
 
 data class FakeMiBandDevice(
     val heartRate: Int = 75,
