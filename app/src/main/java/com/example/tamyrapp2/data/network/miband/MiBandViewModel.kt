@@ -21,7 +21,7 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
     private val sharedPreferences = application.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
 
     private val _dataList = MutableLiveData<List<MiBandDataResponse>?>()
-    val dataList: MutableLiveData<List<MiBandDataResponse>?> = _dataList
+    val dataList: LiveData<List<MiBandDataResponse>?> = _dataList
 
     private val _success = MutableLiveData<Boolean>()
     val success: LiveData<Boolean> = _success
@@ -48,8 +48,7 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
 
         val request = MiBandDataRequest(
             userId = userId,
-            heartRateListJson = heartRateListJson, // передаем список в формате JSON
-            heartRateList = heartRateList, // передаем сам массив пульсов
+            heartRateListJson = heartRateListJson,
             steps = fakeDevice.steps,
             caloriesBurned = fakeDevice.caloriesBurned,
             distance = distance,
@@ -57,18 +56,13 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
             timestamp = timestamp
         )
 
-        // Добавляем в буфер
         MiBandDataBufferManager.addData(request)
     }
 
-
-    // Метод запуска периодической отправки — вызывается один раз после получения токена
     fun startSendingBufferPeriodically() {
         val accessToken = sharedPreferences.getString("access_token", null) ?: return
         MiBandDataBufferManager.startPeriodicSending(accessToken)
     }
-
-    // Остальные методы без изменений
 
     fun getUserMiBandData() {
         val accessToken = sharedPreferences.getString("access_token", null) ?: return
@@ -89,7 +83,7 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
                         val body = response.body()
                         if (body.isNullOrEmpty()) {
                             _error.value = "No data received from server"
-                            _dataList.value = emptyList()  // Заполняем пустым списком
+                            _dataList.value = emptyList()
                         } else {
                             _dataList.value = body
                         }
@@ -97,7 +91,6 @@ class MiBandViewModel(application: Application) : AndroidViewModel(application) 
                         _error.value = "Error loading data: ${response.code()}"
                     }
                 }
-
 
                 override fun onFailure(call: Call<List<MiBandDataResponse>>, t: Throwable) {
                     _error.value = "Network error: ${t.message}"
