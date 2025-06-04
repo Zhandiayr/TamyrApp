@@ -66,7 +66,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="3 days ago"
+                android:text="1 min ago"
                 android:textColor="#635C5C"
                 android:textSize="25sp"
                 android:fontFamily="@font/raleway_bold"
@@ -136,9 +136,9 @@
                 android:id="@+id/tv_heart_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 bpm"
+                android:text=" bpm"
                 android:textColor="#DE4143"
-                android:textSize="40sp"
+                android:textSize="35sp"
                 android:fontFamily="@font/raleway_bold"
                 android:layout_marginTop="20dp"
                 android:gravity="center" />
@@ -204,7 +204,7 @@
                 android:gravity="center"
                 android:text="0 km"
                 android:textColor="#8E900C"
-                android:textSize="40sp" />
+                android:textSize="35sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
